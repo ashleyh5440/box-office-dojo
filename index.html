@@ -12,7 +12,7 @@
         <section>
             <div class="columns">
 
-                <div class="column is-one-third">
+                <div class="column is-one-third leftCol">
                     
                     <nav class="navbar" role="navigation" aria-label="main navigation">
                         <div class="navbar-brand">
@@ -24,22 +24,84 @@
                         </div>
                         <div id="navbarBasicExample" class="navbar-menu">
                           <div class="navbar-start">
-                            <a class="navbar-item">
+                            <a class="navbar-item navBtn">
                               Home
                             </a>
-            
-                            <a class="navbar-item">
+                            <a class="navbar-item navBtn">
                               Some other place
                             </a>
                         </div>
                     </nav>
 
                     <div id="movieList">
+                        <article class="panel is-primary">
+                            <p class="panel-heading">
+                              Movie List
+                            </p>
+                            <a class="panel-block is-active">
+                              <span class="panel-icon">
+                                <i class="fas fa-book" aria-hidden="true"></i>
+                              </span>
+                            <!-- movie from search will go here -->
+                            </a>
+                            <a class="panel-block">
+                              <span class="panel-icon">
+                                <i class="fas fa-book" aria-hidden="true"></i>
+                              </span>
+                              <!-- movie from search will go here -->
+                            </a>
+                            <a class="panel-block">
+                              <span class="panel-icon">
+                                <i class="fas fa-book" aria-hidden="true"></i>
+                              </span>
+                              <!-- movie from search will go here -->
+                            </a>
+                            <a class="panel-block">
+                              <span class="panel-icon">
+                                <i class="fas fa-book" aria-hidden="true"></i>
+                              </span>
+                              <!-- movie from search will go here -->
+                            </a>
+                          </article>
                     </div>
                 </div>
 
-                <div class="column">
+                <div class="column rightCol">
                     <header>The Box Office Dojo</header>
+                    <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
+                    <input class="button submitBtn" type="submit" value="Submit">
+
+                    <div class="columns">
+                        <div class="column is-one-quarter">
+                          First column
+                        </div>
+
+                        <div class="column genres">
+                          <!-- Second column -->
+                          <div class="left">
+                            <button class="button genBtn">Horror</button>
+                            <button class="button genBtn">Action</button>
+                            <button class="button genBtn">Comedy</button>
+                            <button class="button genBtn">Romance</button>
+                          </div>
+                          <div class="right">
+                            <button class="button genBtn">Historical</button>
+                            <button class="button genBtn">Sci-fi</button>
+                            <button class="button genBtn">Fantasy</button>
+                            <button class="button genBtn">Drama</button>
+                          </div>
+                          <!-- <div class="buttons are-medium genreBtn">
+                            <button class="button">Horror</button>
+                            <button class="button">Action</button>
+                            <button class="button">Comedy</button>
+                            <button class="button">Romance</button>
+                            <button class="button">Historical</button>
+                            <button class="button">Sci-fi</button>
+                            <button class="button">Fantasy</button>
+                            <button class="button">Drama</button>
+                          </div> -->
+                        </div>
+                    </div>
 
                 </div>
             

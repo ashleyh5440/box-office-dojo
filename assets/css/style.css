@@ -1,0 +1,42 @@
+header {
+    font-size: 70px;
+    margin-bottom: 4%;
+}
+
+.navBtn {
+    font-size: 30px;
+    margin: 3%;
+}
+
+.leftCol {
+    margin-left: 3%;
+}
+
+.submitBtn {
+    margin: 2%;
+}
+
+.genres {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* border: 5px solid blue; */
+}
+
+.left {
+    /* border: 5px solid black; */
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    /* border: 5px solid red; */
+    display: flex;
+    flex-direction: column;
+}
+
+.genBtn {
+    padding: 80px 130px;
+    margin: 2%;
+}
+

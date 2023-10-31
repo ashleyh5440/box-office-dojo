@@ -7,14 +7,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
+<body style="background-image: url('https://img.freepik.com/free-photo/movie-background-collage_23-2149876003.jpg?w=826&t=st=1698793015~exp=1698793615~hmac=124f7ac58a6320b47d74336c2d4da31e2ee94bc437fee2f74d365b8af077e526');">
     <main>
         <section>
             <div class="columns">
 
                 <div class="column is-one-third leftCol">
                     
-                    <nav class="navbar" role="navigation" aria-label="main navigation">
+                  <nav class="navbar">
+                    <button class="button" id="homeBtn">Home</button>
+                    <button class="button" id="idkBtn">Some place else</button>
+                  </nav>
+
+                    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
                         <div class="navbar-brand">
                           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                             <span aria-hidden="true"></span>
@@ -31,38 +36,15 @@
                               Some other place
                             </a>
                         </div>
-                    </nav>
-
-                    <div id="movieList">
-                        <article class="panel is-primary">
-                            <p class="panel-heading">
-                              Movie List
-                            </p>
-                            <a class="panel-block is-active">
-                              <span class="panel-icon">
-                                <i class="fas fa-book" aria-hidden="true"></i>
-                              </span>
-                            <!-- movie from search will go here -->
-                            </a>
-                            <a class="panel-block">
-                              <span class="panel-icon">
-                                <i class="fas fa-book" aria-hidden="true"></i>
-                              </span>
-                              <!-- movie from search will go here -->
-                            </a>
-                            <a class="panel-block">
-                              <span class="panel-icon">
-                                <i class="fas fa-book" aria-hidden="true"></i>
-                              </span>
-                              <!-- movie from search will go here -->
-                            </a>
-                            <a class="panel-block">
-                              <span class="panel-icon">
-                                <i class="fas fa-book" aria-hidden="true"></i>
-                              </span>
-                              <!-- movie from search will go here -->
-                            </a>
-                          </article>
+                    </nav> -->
+                    <div class="movieListBox">
+                      <div>
+                        <h1>Movie List</h1>
+                      </div>
+                      <div>
+                        <ul id="movieList">
+                        </ul>
+                      </div>
                     </div>
                 </div>
 
@@ -73,33 +55,27 @@
 
                     <div class="columns">
                         <div class="column is-one-quarter">
-                          First column
+                          <div class="searches">
+                            <h1>Previous searches</h1>
+                          </div>
+                            <ul id="previousSearches">
+                            </ul>
                         </div>
 
                         <div class="column genres">
                           <!-- Second column -->
                           <div class="left">
-                            <button class="button genBtn">Horror</button>
-                            <button class="button genBtn">Action</button>
-                            <button class="button genBtn">Comedy</button>
-                            <button class="button genBtn">Romance</button>
+                            <button class="button genBtn" id="horror"><img src="./assets/horror.png">Horror</button>
+                            <button class="button genBtn" id="action"><img src="./assets/action.png">Action</button>
+                            <button class="button genBtn" id="comedy"><img src="./assets/comedy.png">Comedy</button>
+                            <button class="button genBtn" id="romance"><img src="./assets/romance.png">Romance</button>
                           </div>
                           <div class="right">
-                            <button class="button genBtn">Historical</button>
-                            <button class="button genBtn">Sci-fi</button>
-                            <button class="button genBtn">Fantasy</button>
-                            <button class="button genBtn">Drama</button>
+                            <button class="button genBtn" id="historical"><img src="./assets/historical.png">Historical</button>
+                            <button class="button genBtn" id="sci-fi"><img src="./assets/sci-fi.png">Sci-fi</button>
+                            <button class="button genBtn" id="fantasy"><img src="./assets/fantasy.png">Fantasy</button>
+                            <button class="button genBtn" id="thriller"><img src="./assets/thriller.png">Thriller</button>
                           </div>
-                          <!-- <div class="buttons are-medium genreBtn">
-                            <button class="button">Horror</button>
-                            <button class="button">Action</button>
-                            <button class="button">Comedy</button>
-                            <button class="button">Romance</button>
-                            <button class="button">Historical</button>
-                            <button class="button">Sci-fi</button>
-                            <button class="button">Fantasy</button>
-                            <button class="button">Drama</button>
-                          </div> -->
                         </div>
                     </div>
 

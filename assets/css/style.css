@@ -1,11 +1,33 @@
+/* body, .navbar {
+    background-color: rgb(126, 22, 22);
+} */
+
+body {
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
 header {
     font-size: 70px;
     margin-bottom: 4%;
+    color: white;
 }
 
 .navBtn {
     font-size: 30px;
     margin: 3%;
+}
+
+.movieListBox {
+    margin: 5% 2%;
+}
+
+.movieListBox h1{
+    font-size: xx-large;
+    background-color: rgb(30, 30, 188);
+    color: aliceblue;
+    border-radius: 10%;
+    
 }
 
 .leftCol {
@@ -14,23 +36,26 @@ header {
 
 .submitBtn {
     margin: 2%;
+    background-color: rgb(123, 4, 4);
+    color: white;
+}
+
+.previousSearches {
+    border: 5px solid black;
 }
 
 .genres {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* border: 5px solid blue; */
 }
 
 .left {
-    /* border: 5px solid black; */
     display: flex;
     flex-direction: column;
 }
 
 .right {
-    /* border: 5px solid red; */
     display: flex;
     flex-direction: column;
 }
@@ -40,3 +65,44 @@ header {
     margin: 2%;
 }
 
+#homeBtn, #idkBtn {
+    margin: 5% 7%;
+    background-color: rgb(149, 20, 20);
+    padding: 7%;
+}
+
+
+#horror {
+    background-color: red;
+    color: white;
+}
+
+#action {
+    background-color: grey;
+}
+
+#comedy {
+    background-color: yellow;
+}
+
+#romance {
+    background-color: rgb(211, 47, 167);
+}
+
+#historical {
+    background-color: rgb(109, 16, 109);
+    color: white;
+}
+
+#sci-fi {
+    background-color: green;
+}
+
+#fantasy {
+    background-color: rgb(224, 116, 27);
+}
+
+#thriller {
+    background-color: darkblue;
+    color: white;
+}

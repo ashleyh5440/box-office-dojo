@@ -6,6 +6,7 @@
     <title>Box Office Dojo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/movie-search.css">
 </head>
 <body style="background-image: url('https://img.freepik.com/free-photo/movie-background-collage_23-2149876003.jpg?w=826&t=st=1698793015~exp=1698793615~hmac=124f7ac58a6320b47d74336c2d4da31e2ee94bc437fee2f74d365b8af077e526');">
     <main>
@@ -16,8 +17,7 @@
       </section>
         <section class="desktop">
             <div class="columns">
-                <div class="column is-one-third leftCol is-multiline">
-                  <header class="is-hidden-desktop">The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
+                <div class="column is-one-third leftCol">
                   <nav class="navbar">
                     <button class="button" id="homeBtn">Home</button>
                     <button class="button" id="idkBtn">Some place else</button>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="column rightCol is-two-thirds">
-                    <header class="is-hidden-touch">The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
+                    <header>The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
                     <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
                     <input class="button submitBtn" type="submit" value="Submit">
 
@@ -44,7 +44,7 @@
                           </div class="previousSearches">
                             <ul id="previousSearchesList">
                             </ul>
-                        </div>
+                      </div>
 
                         <div class="column genres">
                           <!-- Second column -->

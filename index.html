@@ -12,31 +12,13 @@
         <section>
             <div class="columns">
 
-                <div class="column is-one-third leftCol">
+                <div class="column is-one-third-desktop leftCol">
                     
+                  <header class="is-hidden-desktop">The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
                   <nav class="navbar">
                     <button class="button" id="homeBtn">Home</button>
                     <button class="button" id="idkBtn">Some place else</button>
                   </nav>
-
-                    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-                        <div class="navbar-brand">
-                          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                          </a>
-                        </div>
-                        <div id="navbarBasicExample" class="navbar-menu">
-                          <div class="navbar-start">
-                            <a class="navbar-item navBtn">
-                              Home
-                            </a>
-                            <a class="navbar-item navBtn">
-                              Some other place
-                            </a>
-                        </div>
-                    </nav> -->
                     <div class="movieListBox">
                       <div>
                         <h1>Movie List</h1>
@@ -47,9 +29,8 @@
                       </div>
                     </div>
                 </div>
-
-                <div class="column rightCol">
-                    <header>The Box Office Dojo</header>
+                <div class="column rightCol is-two-thirds-desktop is-multiline">
+                    <header class="is-hidden-touch">The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
                     <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
                     <input class="button submitBtn" type="submit" value="Submit">
 
@@ -57,8 +38,8 @@
                         <div class="column is-one-quarter">
                           <div class="searches">
                             <h1>Previous searches</h1>
-                          </div>
-                            <ul id="previousSearches">
+                          </div class="previousSearches">
+                            <ul id="previousSearchesList">
                             </ul>
                         </div>
 

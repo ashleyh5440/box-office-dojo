@@ -1,10 +1,6 @@
-/* body, .navbar {
-    background-color: rgb(126, 22, 22);
-} */
-
 body {
-    background-repeat: no-repeat;
-    background-size: 100%;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
 }
 
 header {
@@ -13,9 +9,8 @@ header {
     color: white;
 }
 
-.navBtn {
-    font-size: 30px;
-    margin: 3%;
+.navbar {
+    background-color: transparent;
 }
 
 .movieListBox {
@@ -40,8 +35,11 @@ header {
     color: white;
 }
 
-.previousSearches {
-    border: 5px solid black;
+.searches h1 {
+    font-size: x-large;
+    color: white;
+    background-color: blue;
+    padding-left: 15px;
 }
 
 .genres {
@@ -69,8 +67,14 @@ header {
     margin: 5% 7%;
     background-color: rgb(149, 20, 20);
     padding: 7%;
+    color: white;
+    font-size: 25px;
 }
 
+#header-img {
+    width: 15%;
+    margin-left: 4%;
+}
 
 #horror {
     background-color: red;

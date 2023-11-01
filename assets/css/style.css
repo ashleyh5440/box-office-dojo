@@ -1,0 +1,142 @@
+body {
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+}
+
+header {
+    font-size: 70px;
+    margin-bottom: 4%;
+    color: white;
+}
+
+.navbar {
+    background-color: transparent;
+}
+
+.movieListBox {
+    margin: 5% 2%;
+}
+
+.movieListBox h1{
+    font-size: xx-large;
+    background-color: rgb(30, 30, 188);
+    color: aliceblue;
+    border-radius: 10%;
+    
+}
+
+.leftCol {
+    margin-left: 3%;
+}
+
+.submitBtn {
+    margin: 2%;
+    background-color: rgb(123, 4, 4);
+    color: white;
+}
+
+.searches h1 {
+    font-size: x-large;
+    color: white;
+    background-color: blue;
+    padding-left: 15px;
+}
+
+.genres {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 10%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+}
+
+.genBtn {
+    padding: 80px 130px;
+    margin: 2%;
+    font-size: 30px;
+}
+
+#homeBtn, #idkBtn {
+    margin: 5% 7%;
+    background-color: rgb(149, 20, 20);
+    padding: 7%;
+    color: white;
+    font-size: 25px;
+}
+
+#header-img {
+    width: 15%;
+    margin-left: 4%;
+}
+
+#horror {
+    background-color: red;
+    color: white;
+}
+
+#action {
+    background-color: grey;
+}
+
+#comedy {
+    background-color: yellow;
+}
+
+#romance {
+    background-color: rgb(211, 47, 167);
+}
+
+#historical {
+    background-color: rgb(109, 16, 109);
+    color: white;
+}
+
+#sci-fi {
+    background-color: green;
+}
+
+#fantasy {
+    background-color: rgb(224, 116, 27);
+}
+
+#thriller {
+    background-color: darkblue;
+    color: white;
+}
+
+.mobile {
+    display: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .mobile {
+        display: block;
+    }
+    .desktop {
+        display: none;
+    }
+    .genres {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .genre-img {
+        width: 18%;
+    }
+    #homeBtn, #idkBtn {
+        margin: 5% 7%;
+        background-color: rgb(149, 20, 20);
+        padding: 4%;
+        color: white;
+        font-size: 25px;
+    }
+}

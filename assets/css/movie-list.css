@@ -1,0 +1,25 @@
+h1 {
+    font-size: xx-large;
+}
+
+
+
+
+.leftCol {
+    border: 5px solid red;
+    margin-right: 40px;
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap ;
+}
+
+.movie-search-result {
+    border: 5px solid yellow;
+    margin-right: 3%;
+}
+
+.giphy {
+    border: 5px solid pink;
+}

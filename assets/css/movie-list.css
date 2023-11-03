@@ -1,12 +1,14 @@
 h1 {
-    font-size: xx-large;
+    font-size: 40px;
 }
 
-
-
+li{
+    font-size: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif 
+}
 
 .leftCol {
-    border: 5px solid red;
+    border: 5px solid green;
     margin-right: 40px;
 }
 
@@ -15,11 +17,18 @@ h1 {
     flex-wrap: wrap ;
 }
 
-.movie-search-result {
-    border: 5px solid yellow;
+.movie-list-container {
+    border: 5px solid black;
     margin-right: 3%;
+    background-color: white;
+    /* how can I make this effect the background but not the text? */
+    opacity: 0.5; 
 }
 
-.giphy {
-    border: 5px solid pink;
+.container-head {
+    font-family: 'Joti One', serif;
+    font-size: 60px;
+    text-align: center;
+    opacity: 1;
+    color: black;
 }

@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box Office Dojo</title>
+    <title>Movie List</title>
+<!-- header font -->
+    <link href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap" rel="stylesheet">
+<!-- stylsheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/movie-search.css">
+    <link rel="stylesheet" href="./assets/css/movie-list.css">
 </head>
 <body style="background-image: url('https://img.freepik.com/free-photo/movie-background-collage_23-2149876003.jpg?w=826&t=st=1698793015~exp=1698793615~hmac=124f7ac58a6320b47d74336c2d4da31e2ee94bc437fee2f74d365b8af077e526');">
     <main>
@@ -16,17 +20,8 @@
           <div class="column is-one-quarter leftCol">
             <nav class="navbar">
               <button class="button" id="homeBtn">Home</button>
-              <button class="button" id="idkBtn">Some place else</button>
+              <button class="button" id="idkBtn">Movie List</button>
             </nav>
-              <div class="movieListBox">
-                <div>
-                  <h1>Movie List</h1>
-                </div>
-                <div>
-                  <ul id="movieList">
-                  </ul>
-                </div>
-              </div>
                 <div class="searches">
                   <h1>Previous searches</h1>
                 </div class="previousSearches">
@@ -39,20 +34,11 @@
                     <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
                     <input class="button submitBtn" type="submit" value="Submit">
 
-          <div class="columns movie-search-result">
-
-            <div class="column">
-              <h1>Movie Title</h1>
-              <p>This will be information about the movie</p>
-            </div>
-            <div class="column">
-              <button class="button">Add to watch list</button>
-              <p>Where to stream</p>
-              <div class="giphy">
-                <br>
-              </div>
-            </div>
-
+          <div class="movie-list-container">
+            <h1 class="container-head">Movie List</h1>
+            <ul id="userMovieList">
+            <li>Movie Title</li>
+            </ul>
           </div>
 
         </div>

@@ -27,6 +27,7 @@ function searchMovie() {
                 searchResultsId = data.results[i].id;
                 searchResults.push(data.results[i]);
                 localStorage.setItem("movie-search", JSON.stringify(searchResults));
+                localStorage.setItem("search-use", "search-button")
                 // Moves to movie search page
                 window.location.href = "movie-search.html"
             }
@@ -102,6 +103,7 @@ function searchGenre(event) {
         .then(function (data) {
             console.log(data);
             localStorage.setItem("genre-search", JSON.stringify(data));
+            localStorage.setItem("search-use", "genre-button");
             // Moves to movie search page
             window.location.href = "movie-search.html"
         })

@@ -1,3 +1,13 @@
+var searchMethod = localStorage.getItem("search-use");
+if (searchMethod === "search-button") {
+    displayMovieSearch();
+} else {
+    displayGenreSearch();
+}
+
+
+
+
 function displayGenreSearch() {
     var resultList = document.querySelector(".movie-search-result");
     // Clears any pre-existing text

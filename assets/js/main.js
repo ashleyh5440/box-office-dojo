@@ -59,6 +59,14 @@ function setGenreBtns() {
     var sciBtn = document.querySelector("#sci-fi");
     var fantasyBtn = document.querySelector("#fantasy");
     var thrillerBtn = document.querySelector("#thriller");
+    var horrorBtnM = document.querySelector("#horror-mobile");
+    var actionBtnM = document.querySelector("#action-mobile");
+    var comedyBtnM = document.querySelector("#comedy-mobile");
+    var romanceBtnM = document.querySelector("#romance-mobile");
+    var historyBtnM = document.querySelector("#historical-mobile");
+    var sciBtnM = document.querySelector("#sci-fi-mobile");
+    var fantasyBtnM = document.querySelector("#fantasy-mobile");
+    var thrillerBtnM = document.querySelector("#thriller-mobile");
 
     // Prevents error when navigating to a page without genre buttons
     if (horrorBtn) {
@@ -71,6 +79,14 @@ function setGenreBtns() {
         sciBtn.value = 878;
         fantasyBtn.value = 14; 
         thrillerBtn.value = 53;
+        horrorBtnM.value = 27;
+        actionBtnM.value = 28;
+        comedyBtnM.value = 35;
+        romanceBtnM.value = 10749;
+        historyBtnM.value = 36;
+        sciBtnM.value = 878;
+        fantasyBtnM.value = 14; 
+        thrillerBtnM.value = 53;
 
         // Selects all genre buttons to apply an event listener to each
         var genreButtons = [
@@ -82,6 +98,14 @@ function setGenreBtns() {
             sciBtn,
             fantasyBtn,
             thrillerBtn,
+            horrorBtnM,
+            actionBtnM,
+            comedyBtnM,
+            romanceBtnM,
+            historyBtnM,
+            sciBtnM,
+            fantasyBtnM,
+            thrillerBtnM,
         ]
         // Processes above array to allow each button to search for movies in its genre
         for (var i = 0; i < genreButtons.length; i++) {

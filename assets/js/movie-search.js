@@ -1,12 +1,11 @@
+
+// Checks which method was used to search before running the appropriate function
 var searchMethod = localStorage.getItem("search-use");
 if (searchMethod === "search-button") {
     displayMovieSearch();
 } else {
     displayGenreSearch();
 }
-
-
-
 
 function displayGenreSearch() {
     var resultList = document.querySelector(".movie-search-result");
@@ -25,6 +24,7 @@ function displayGenreSearch() {
             continue;
         }
 
+        // Creates new element for each movie and adds a title and the movie poster
         movie = document.createElement("section")
         movie.setAttribute("class", "search-display column is-6");
         resultList.appendChild(movie);
@@ -57,6 +57,7 @@ function displayMovieSearch() {
             continue;
         }
 
+        // Creates new element for each movie and adds a title and the movie poster
         movie = document.createElement("section")
         movie.setAttribute("class", "search-display column is-6");
         resultList.appendChild(movie);

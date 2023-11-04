@@ -15,8 +15,12 @@ previousSearchInit();
 
 var submitButton = document.querySelector(".submitBtn");
 var movieInput = document.querySelector("#movieInput");
+var movieListBtn = document.querySelector("#movieListBtn");
+var homeBtn = document.querySelector("#homeBtn");
 
 submitButton.addEventListener("click", searchMovie);
+movieListBtn.addEventListener("click", moveToList);
+homeBtn.addEventListener("click", returnToHomepage);
 
 // Searches for movie based on user text input
 function searchMovie() {
@@ -212,4 +216,14 @@ function saveSearch() {
     // Saves and refreshes previous search list
     localStorage.setItem("previous-searches", JSON.stringify(previousSearches));
     renderPreviousSearch();
+}
+
+// For using the movie list button to travel to the movie list page
+function moveToList() {
+    window.location.href = "movie-list.html";
+}
+
+// For returning to homepage
+function returnToHomepage() {
+    window.location.href = "index.html";
 }

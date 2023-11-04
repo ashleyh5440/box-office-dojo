@@ -3,7 +3,7 @@ var getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/9479?api_key=f73119
 var searchGenreUrl = "https://api.themoviedb.org/3/discover/movie?genre={genre-name}&api_key=f73119f46966c54d15a0614dc6b82103"
 var genreListUrl = "https://api.themoviedb.org/3/genre/movie/list?api_key=f73119f46966c54d15a0614dc6b82103"
 
-// Creates empty array to fill with previously searched items
+// Creates empty array to fill with previously searched items, placed outside functions to avoid errors
 var previousSearches = []
 
 // Sets up genre buttons for use
@@ -146,7 +146,7 @@ function searchGenre(event) {
         })
     }
 
-// Console logs genres by id in IMDB, useful for assigning values to buttons
+// Console logs genres by id in TMDB, useful for assigning values to buttons
 function getGenreList() {
     fetch(genreListUrl)        
     .then(function (response) { 

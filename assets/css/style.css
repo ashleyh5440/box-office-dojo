@@ -78,6 +78,10 @@ header {
     display: none;
 }
 
+#movieInput {
+    margin-right: 35%;
+}
+
 #homeBtn, #movieListBtn {
     margin: 5% 7%;
     background-color: rgb(149, 20, 20);

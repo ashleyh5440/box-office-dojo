@@ -12,7 +12,7 @@ var movieInput = document.querySelector("#movieInput");
 submitButton.addEventListener("click", searchMovie);
 // Searches for movie based on user text input
 function searchMovie() {
-    searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&api_key=f73119f46966c54d15a0614dc6b82103"
+    searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(searchMovieUrl)
         .then(function (response) {
             return response.json();
@@ -20,11 +20,16 @@ function searchMovie() {
         .then(function (data) {
             console.log(data);
             // Logs details for all possible listings of the searched movie
+            searchResults = []
             for (var i = 0; i < data.results.length; i++) {
                 // console.log(data.results[i].id);
                 console.log(data.results[i].original_title);
                 searchResultsId = data.results[i].id;
-                getMovieDetails();
+                searchResults.push(data.results[i]);
+                localStorage.setItem("movie-search", JSON.stringify(searchResults));
+                localStorage.setItem("search-use", "search-button")
+                // Moves to movie search page
+                window.location.href = "movie-search.html"
             }
             
         })
@@ -32,13 +37,14 @@ function searchMovie() {
 
 // Gets specific details for individual movies to be used later
 function getMovieDetails() {
-    getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/" + searchResultsId + "?api_key=f73119f46966c54d15a0614dc6b82103"
+    getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/" + searchResultsId + "?language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(getMovieDetailsUrl)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
-        // console.log(data);
+        console.log(data);
+
     })
 }
 
@@ -53,39 +59,66 @@ function setGenreBtns() {
     var sciBtn = document.querySelector("#sci-fi");
     var fantasyBtn = document.querySelector("#fantasy");
     var thrillerBtn = document.querySelector("#thriller");
+    var horrorBtnM = document.querySelector("#horror-mobile");
+    var actionBtnM = document.querySelector("#action-mobile");
+    var comedyBtnM = document.querySelector("#comedy-mobile");
+    var romanceBtnM = document.querySelector("#romance-mobile");
+    var historyBtnM = document.querySelector("#historical-mobile");
+    var sciBtnM = document.querySelector("#sci-fi-mobile");
+    var fantasyBtnM = document.querySelector("#fantasy-mobile");
+    var thrillerBtnM = document.querySelector("#thriller-mobile");
 
-    // Assigns genre buttons values to match IMDB API
-    horrorBtn.value = 27;
-    actionBtn.value = 28;
-    comedyBtn.value = 35;
-    romanceBtn.value = 10749;
-    historyBtn.value = 36;
-    sciBtn.value = 878;
-    fantasyBtn.value = 14; 
-    thrillerBtn.value = 53;
+    // Prevents error when navigating to a page without genre buttons
+    if (horrorBtn) {
+        // Assigns genre buttons values to match IMDB API
+        horrorBtn.value = 27;
+        actionBtn.value = 28;
+        comedyBtn.value = 35;
+        romanceBtn.value = 10749;
+        historyBtn.value = 36;
+        sciBtn.value = 878;
+        fantasyBtn.value = 14; 
+        thrillerBtn.value = 53;
+        horrorBtnM.value = 27;
+        actionBtnM.value = 28;
+        comedyBtnM.value = 35;
+        romanceBtnM.value = 10749;
+        historyBtnM.value = 36;
+        sciBtnM.value = 878;
+        fantasyBtnM.value = 14; 
+        thrillerBtnM.value = 53;
 
-    // Selects all genre buttons to apply an event listener to each
-    var genreButtons = [
-        horrorBtn,
-        actionBtn,
-        comedyBtn,
-        romanceBtn,
-        historyBtn,
-        sciBtn,
-        fantasyBtn,
-        thrillerBtn,
-    ]
-    // Processes above array to allow each button to search for movies in its genre
-    for (var i = 0; i < genreButtons.length; i++) {
-        console.log(genreButtons[i].value)
-        genreButtons[i].addEventListener("click", searchGenre)
+        // Selects all genre buttons to apply an event listener to each
+        var genreButtons = [
+            horrorBtn,
+            actionBtn,
+            comedyBtn,
+            romanceBtn,
+            historyBtn,
+            sciBtn,
+            fantasyBtn,
+            thrillerBtn,
+            horrorBtnM,
+            actionBtnM,
+            comedyBtnM,
+            romanceBtnM,
+            historyBtnM,
+            sciBtnM,
+            fantasyBtnM,
+            thrillerBtnM,
+        ]
+        // Processes above array to allow each button to search for movies in its genre
+        for (var i = 0; i < genreButtons.length; i++) {
+            console.log(genreButtons[i].value)
+            genreButtons[i].addEventListener("click", searchGenre)
+        }
     }
 }
 
 // Gets movies by genre
 function searchGenre(event) {
     console.log(event.target.value)
-    searchGenreUrl = "https://api.themoviedb.org/3/discover/movie?with_genres=" + event.target.value + "&api_key=f73119f46966c54d15a0614dc6b82103"
+    searchGenreUrl = "https://api.themoviedb.org/3/discover/movie?with_genres=" + event.target.value + "&language=en-us&api_key=f73119f46966c54d15a0614dc6b82103"
     console.log(searchGenreUrl)
     fetch(searchGenreUrl)
         .then(function (response) {
@@ -93,6 +126,10 @@ function searchGenre(event) {
         })
         .then(function (data) {
             console.log(data);
+            localStorage.setItem("genre-search", JSON.stringify(data));
+            localStorage.setItem("search-use", "genre-button");
+            // Moves to movie search page
+            window.location.href = "movie-search.html"
         })
     }
 

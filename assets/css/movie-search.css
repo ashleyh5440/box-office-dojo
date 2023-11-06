@@ -19,6 +19,8 @@ p {
 .movie-search-result {
     border: 5px solid orange;
     margin-right: 3%;
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 3%;
 }
 
@@ -33,3 +35,4 @@ p {
     color: white;
     border: none;
 }
+

@@ -3,15 +3,28 @@ var getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/9479?api_key=f73119
 var searchGenreUrl = "https://api.themoviedb.org/3/discover/movie?genre={genre-name}&api_key=f73119f46966c54d15a0614dc6b82103"
 var genreListUrl = "https://api.themoviedb.org/3/genre/movie/list?api_key=f73119f46966c54d15a0614dc6b82103"
 
+// Creates empty array to fill with previously searched items, placed outside functions to avoid errors
+var previousSearches = []
+
+// Sets up genre buttons for use
 getGenreList();
 setGenreBtns();
 
+// Sets up previous search list for use
+previousSearchInit();
+
 var submitButton = document.querySelector(".submitBtn");
 var movieInput = document.querySelector("#movieInput");
+var movieListBtn = document.querySelector("#movieListBtn");
+var homeBtn = document.querySelector("#homeBtn");
 
 submitButton.addEventListener("click", searchMovie);
+movieListBtn.addEventListener("click", moveToList);
+homeBtn.addEventListener("click", returnToHomepage);
+
 // Searches for movie based on user text input
 function searchMovie() {
+    saveSearch();
     searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(searchMovieUrl)
         .then(function (response) {
@@ -118,7 +131,7 @@ function setGenreBtns() {
 // Gets movies by genre
 function searchGenre(event) {
     console.log(event.target.value)
-    searchGenreUrl = "https://api.themoviedb.org/3/discover/movie?with_genres=" + event.target.value + "&language=en-us&api_key=f73119f46966c54d15a0614dc6b82103"
+    searchGenreUrl = "https://api.themoviedb.org/3/discover/movie?with_genres=" + parseInt(event.target.value) + "&language=en-us&api_key=f73119f46966c54d15a0614dc6b82103"
     console.log(searchGenreUrl)
     fetch(searchGenreUrl)
         .then(function (response) {
@@ -133,7 +146,7 @@ function searchGenre(event) {
         })
     }
 
-// Console logs genres by id in IMDB, useful for assigning values to buttons
+// Console logs genres by id in TMDB, useful for assigning values to buttons
 function getGenreList() {
     fetch(genreListUrl)        
     .then(function (response) { 
@@ -142,4 +155,75 @@ function getGenreList() {
     .then(function (data) {
             console.log(data);
         })
+}
+
+// Initial function for starting the previous search display
+function previousSearchInit() {
+    previousSearches = previousSearches.concat(JSON.parse(localStorage.getItem("previous-searches")));
+
+    // Keeps previous search length limited to 5
+    if (previousSearches.length > 5) {
+        previousSearches.pop();
+        localStorage.setItem("previous-searches", JSON.stringify([previousSearches]));
+    }
+
+    // Ensures blank elements won't be created with empty array when no titles have been searched yet
+    if (previousSearches[0] !== null) {
+        renderPreviousSearch();
+    }
+
+}
+
+// For displaying array of previously searched movies
+function renderPreviousSearch() {
+    var previousSearchList = document.querySelector("#previousSearchesList");
+
+    // Clears any preexisting text from list
+    previousSearchesList.innerHTML = "";
+    
+    // Creates list items for each previously searched movie, sets class and text and appends to list
+    for (var i = 0; i < previousSearches.length; i++) {
+       
+        var previousSearchItem = document.createElement("li");
+        
+        previousSearchItem.setAttribute("class", "previous-search-item");
+        previousSearchItem.textContent = previousSearches[i];
+        
+        previousSearchList.appendChild(previousSearchItem);
+    }
+}
+
+// For saving new searched movies to local storage
+function saveSearch() {
+    // Ensures data is present within text field
+    if (movieInput.value === "") {
+        return;
+    }
+
+    // Removes null element from an empty array when first movie is searched and saved
+    if (previousSearches[0] === null) {
+        previousSearches.pop();
+    }
+
+    // Adds newly searched movie to front of array
+    previousSearches.unshift(movieInput.value);
+
+    // Limits array length to 5
+    if (previousSearches.length > 5) {
+        previousSearches.pop();
+    }
+    
+    // Saves and refreshes previous search list
+    localStorage.setItem("previous-searches", JSON.stringify(previousSearches));
+    renderPreviousSearch();
+}
+
+// For using the movie list button to travel to the movie list page
+function moveToList() {
+    window.location.href = "movie-list.html";
+}
+
+// For returning to homepage
+function returnToHomepage() {
+    window.location.href = "index.html";
 }

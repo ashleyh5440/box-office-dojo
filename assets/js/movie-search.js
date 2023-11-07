@@ -147,6 +147,7 @@ function displayMovieDetails(event) {
 
         // Uses JQuery for event delegation
         $(resultList).on("click", "#add-button", addToList);
+        $(resultList).on("click", "#add-button", getMovieList);
 
         // Insert GIPHY addition below in new appended section
 

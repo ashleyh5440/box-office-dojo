@@ -123,7 +123,6 @@ function setGenreBtns() {
         ]
         // Processes above array to allow each button to search for movies in its genre
         for (var i = 0; i < genreButtons.length; i++) {
-            console.log(genreButtons[i].value)
             genreButtons[i].addEventListener("click", searchGenre)
         }
     }
@@ -256,5 +255,33 @@ function returnToHomepage() {
 }
 
 function getMovieList() {
+    var movieListDisplay = document.querySelector("#movieList");
+    if (!movieListDisplay) {
+        return;
+    }
+
+    // Prevents lists from duplicating
+    movieListDisplay.innerHTML = ""
+
+    // Creates empty array for the start
+    var movieTitles = [];
+   movieTitles = movieTitles.concat(JSON.parse(localStorage.getItem("watch-list")));
     
+    // Ensures blank elements won't be created with empty array when no titles have been searched yet
+    if (movieTitles[0] === null) {
+        return;
+    }
+    console.log(movieTitles)
+    console.log(movieListDisplay)
+
+    // Displays top 10 movie list titles
+    for (var i = 0; i < 10; i++) {
+       
+        var movieTitle = document.createElement("li");
+        
+        movieTitle.setAttribute("class", "movie-title");
+        movieTitle.textContent = movieTitles[i];
+
+        movieListDisplay.appendChild(movieTitle);
+    }
 }

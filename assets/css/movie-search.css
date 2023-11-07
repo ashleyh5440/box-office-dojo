@@ -16,12 +16,25 @@ p {
     flex-wrap: wrap ;
 }
 
-.movie-search-result {
+.rightCol {
     border: 5px solid orange;
-    margin-right: 3%;
+    /* margin-left: 5%; */
+}
+
+.mleft {
+    border: 5px solid black;
+}
+
+.mright {
+    border: 5px solid red;
+    margin-right: 5%;
     display: flex;
-    flex-wrap: wrap;
-    margin-top: 3%;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.whereToWatch {
+    border: 5px solid green;
 }
 
 .movie-search-result h3 {
@@ -34,6 +47,7 @@ p {
 .giphy {
     border: 5px solid pink;
 }
+
 
 #addListBtn {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

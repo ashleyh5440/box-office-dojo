@@ -8,7 +8,6 @@ li{
 }
 
 .leftCol {
-    border: 5px solid green;
     margin-right: 40px;
 }
 
@@ -18,7 +17,6 @@ li{
 }
 
 .movie-list-container {
-    border: 5px solid black;
     margin-right: 3%;
     background-color: white;
     /* how can I make this effect the background but not the text? */

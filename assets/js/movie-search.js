@@ -179,13 +179,19 @@ function getStreamingServices() {
                 streamProvider.textContent = data.results.US.flatrate[i].provider_name;
                 streamList.appendChild(streamProvider);
             }
-        } else {
+        } else if (data.results.US.rent) {
             for (var i = 0; i < data.results.US.rent.length; i++) {
                 var streamProvider = document.createElement("li");
                 streamProvider.textContent = data.results.US.rent[i].provider_name;
                 streamList.appendChild(streamProvider);
         }
-    }
+        } else {
+            for (var i = 0; i < data.results.US.buy.length; i++) {
+                var streamProvider = document.createElement("li");
+                streamProvider.textContent = data.results.US.buy[i].provider_name;
+                streamList.appendChild(streamProvider);
+        }
+        }
     })
 
 }

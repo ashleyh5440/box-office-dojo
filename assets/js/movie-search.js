@@ -1,3 +1,5 @@
+
+// Checks which method was used to search before running the appropriate function
 var searchMethod = localStorage.getItem("search-use");
 if (searchMethod === "search-button") {
     displayMovieSearch();
@@ -5,9 +7,7 @@ if (searchMethod === "search-button") {
     displayGenreSearch();
 }
 
-
-
-
+// Displays searched movies from a genre button
 function displayGenreSearch() {
     var resultList = document.querySelector(".movie-search-result");
     // Clears any pre-existing text
@@ -25,21 +25,31 @@ function displayGenreSearch() {
             continue;
         }
 
+        // Creates new element for each movie and adds a title and the movie poster
         movie = document.createElement("section")
         movie.setAttribute("class", "search-display column is-6");
         resultList.appendChild(movie);
 
         movieTitle = document.createElement("h3");
+        movieLink = document.createElement("a");
         moviePoster = document.createElement("img");
 
         movieTitle.textContent = movieId.title;
         moviePoster.src = "https://image.tmdb.org/t/p/w500" + movieId.poster_path;
+        moviePoster.value = movieId.id
+        moviePoster.setAttribute("class", "movie-poster")
+        console.log(moviePoster.value)
 
         movie.appendChild(movieTitle);
-        movie.appendChild(moviePoster);
+        movie.appendChild(movieLink)
+        movieLink.appendChild(moviePoster);
     }
+
+    // Uses JQuery for event delegation
+    $(resultList).on("click", ".movie-poster", displayMovieDetails);
 }
 
+// Displays searched movies from search bar input
 function displayMovieSearch() {
     var resultList = document.querySelector(".movie-search-result");
     // Clears any pre-existing text
@@ -57,18 +67,77 @@ function displayMovieSearch() {
             continue;
         }
 
+        // Creates new element for each movie and adds a title and the movie poster
         movie = document.createElement("section")
         movie.setAttribute("class", "search-display column is-6");
         resultList.appendChild(movie);
 
         movieTitle = document.createElement("h3");
+        movieLink = document.createElement("a");
         moviePoster = document.createElement("img");
 
         movieTitle.textContent = movieId.title;
         moviePoster.src = "https://image.tmdb.org/t/p/w500" + movieId.poster_path;
+        moviePoster.value = movieId.id
+        moviePoster.setAttribute("class", "movie-poster")
 
         movie.appendChild(movieTitle);
-        movie.appendChild(moviePoster);
+        movie.appendChild(movieLink);
+        movieLink.appendChild(moviePoster);
     }
 
+    // Uses JQuery for event delegation
+    $(resultList).on("click", ".movie-poster", displayMovieDetails);
+}
+
+// Displays details of individually selected movies
+function displayMovieDetails(event) {
+    var resultList = document.querySelector(".movie-search-result");
+
+    // Grabs ID for API use while it still exists
+    var searchResultsId = event.target.value;
+    console.log(moviePoster.value)
+    // Clears any pre-existing text
+    resultList.innerHTML = ""
+   
+    getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/" + searchResultsId + "?language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
+    fetch(getMovieDetailsUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        // Creates section on left for poster and title
+        movie = document.createElement("section");
+        movie.setAttribute("class", "search-display column is-6");
+        resultList.appendChild(movie);
+    
+        movieTitle = document.createElement("h3");
+        moviePoster = document.createElement("img");
+    
+        movieTitle.textContent = data.title;
+        moviePoster.src = "https://image.tmdb.org/t/p/w500" + data.poster_path;
+        moviePoster.setAttribute("class", "movie-poster");
+    
+        movie.appendChild(movieTitle);
+        movie.appendChild(moviePoster);
+
+        // Creates section on right for movie details
+        movieDetail = document.createElement("section");
+        movieDetail.setAttribute("class", "search-display column is-6");
+        resultList.appendChild(movieDetail);
+
+        movieSummary = document.createElement("p");
+        movieTime = document.createElement("p");
+
+        movieSummary.textContent = data.overview;
+        movieTime.textContent = data.runtime + " minutes";
+
+        movieDetail.appendChild(movieSummary);
+        movieDetail.appendChild(movieTime);
+
+
+        // Insert GIPHY addition below in new appended section
+
+    })
 }

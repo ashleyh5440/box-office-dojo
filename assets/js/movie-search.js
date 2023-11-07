@@ -3,8 +3,10 @@
 var searchMethod = localStorage.getItem("search-use");
 if (searchMethod === "search-button") {
     displayMovieSearch();
-} else {
+} else if (searchMethod === "genre-button") {
     displayGenreSearch();
+} else {
+    displayMovieAgain();
 }
 
 // Displays searched movies from a genre button
@@ -221,4 +223,63 @@ function addToList() {
   
 
     localStorage.setItem("watch-list", JSON.stringify(movieList));
+}
+
+function displayMovieAgain() {
+    var resultList = document.querySelector(".movie-search-result");
+
+    // Grabs ID for API use
+    var searchResultsId = JSON.parse(localStorage.getItem("movie-search"));
+    // Clears any pre-existing text
+    resultList.innerHTML = ""
+   
+    getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/" + searchResultsId + "?language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
+    fetch(getMovieDetailsUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        // Creates section on left for poster and title
+        movie = document.createElement("section");
+        movie.setAttribute("class", "search-display column is-6");
+        resultList.appendChild(movie);
+    
+        movieTitle = document.createElement("h3");
+        moviePoster = document.createElement("img");
+    
+        movieTitle.textContent = data.title;
+        moviePoster.src = "https://image.tmdb.org/t/p/w500" + data.poster_path;
+        moviePoster.setAttribute("class", "movie-poster");
+        moviePoster.value = data.id
+    
+        movie.appendChild(movieTitle);
+        movie.appendChild(moviePoster);
+
+        // Creates section on right for movie details
+        movieDetail = document.createElement("section");
+        movieDetail.setAttribute("class", "search-display column is-6");
+        resultList.appendChild(movieDetail);
+
+        movieSummary = document.createElement("p");
+        movieTime = document.createElement("p");
+
+        movieSummary.textContent = data.overview;
+        movieTime.textContent = data.runtime + " minutes";
+        
+        movieSummary.setAttribute("color", "white");
+
+        movieDetail.appendChild(movieSummary);
+        movieDetail.appendChild(movieTime);
+
+        getStreamingServices();
+
+        // Uses JQuery for event delegation
+        $(resultList).on("click", "#add-button", addToList);
+        $(resultList).on("click", "#add-button", getMovieList);
+
+        // Insert GIPHY addition below in new appended section
+
+    })
+    
 }

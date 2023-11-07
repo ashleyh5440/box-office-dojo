@@ -9,6 +9,7 @@ var previousSearches = []
 // Sets up genre buttons for use
 getGenreList();
 setGenreBtns();
+getMovieList();
 
 // Sets up previous search list for use
 previousSearchInit();
@@ -252,4 +253,8 @@ function moveToList() {
 // For returning to homepage
 function returnToHomepage() {
     window.location.href = "index.html";
+}
+
+function getMovieList() {
+    
 }

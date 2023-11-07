@@ -119,6 +119,7 @@ function displayMovieDetails(event) {
         movieTitle.textContent = data.title;
         moviePoster.src = "https://image.tmdb.org/t/p/w500" + data.poster_path;
         moviePoster.setAttribute("class", "movie-poster");
+        moviePoster.value = data.id
     
         movie.appendChild(movieTitle);
         movie.appendChild(moviePoster);

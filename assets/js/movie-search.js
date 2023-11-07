@@ -166,22 +166,28 @@ function getStreamingServices() {
         return response.json();
     })
     .then(function (data) {
+        console.log(data)
 
         var streamList = document.createElement("ul");
-        streamList.textContent = "Streaming on:"
+        streamList.textContent = "Streaming on:";
         movieDetail.appendChild(streamList);
 
-        for (var i = 0; i < data.results.US.flatrate.length; i++) {
-            console.log(data.results.US.flatrate[i])
-
-            var streamProvider = document.createElement("li");
-
-            streamProvider.textContent = data.results.US.flatrate[i].provider_name;
-
-            streamList.appendChild(streamProvider);
-            console.log(streamProvider)
+        // If else required to display data due to API object
+        if (data.results.US.flatrate) {
+            for (var i = 0; i < data.results.US.flatrate.length; i++) {
+                var streamProvider = document.createElement("li");
+                streamProvider.textContent = data.results.US.flatrate[i].provider_name;
+                streamList.appendChild(streamProvider);
+            }
+        } else {
+            for (var i = 0; i < data.results.US.rent.length; i++) {
+                var streamProvider = document.createElement("li");
+                streamProvider.textContent = data.results.US.rent[i].provider_name;
+                streamList.appendChild(streamProvider);
         }
+    }
     })
+
 }
 
 // Adds movie to watch list

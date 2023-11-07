@@ -9,6 +9,7 @@ var previousSearches = []
 // Sets up genre buttons for use
 getGenreList();
 setGenreBtns();
+// Display movie list if existing
 getMovieList();
 
 // Sets up previous search list for use
@@ -254,8 +255,11 @@ function returnToHomepage() {
     window.location.href = "index.html";
 }
 
+// For displaying movie list on movie list element
 function getMovieList() {
     var movieListDisplay = document.querySelector("#movieList");
+
+    // Prevents error when on the movie-list.html page
     if (!movieListDisplay) {
         return;
     }
@@ -271,8 +275,6 @@ function getMovieList() {
     if (movieTitles[0] === null) {
         return;
     }
-    console.log(movieTitles)
-    console.log(movieListDisplay)
 
     // Displays top 10 movie list titles
     for (var i = 0; i < 10; i++) {

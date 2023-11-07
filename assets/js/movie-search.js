@@ -145,6 +145,8 @@ function displayMovieDetails(event) {
         movieDetail.appendChild(movieTime);
         movieDetail.appendChild(addBtn)
 
+        getStreamingServices();
+
         // Uses JQuery for event delegation
         $(resultList).on("click", "#add-button", addToList);
         $(resultList).on("click", "#add-button", getMovieList);
@@ -158,13 +160,27 @@ function displayMovieDetails(event) {
 function getStreamingServices() {
     var streamingServices = "https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
 
-    streamingServices = "https://api.themoviedb.org/3/movie/11/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
+    streamingServices = "https://api.themoviedb.org/3/movie/" + moviePoster.value + "/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(streamingServices)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
-        console.log(data);
+
+        var streamList = document.createElement("ul");
+        streamList.textContent = "Streaming on:"
+        movieDetail.appendChild(streamList);
+
+        for (var i = 0; i < data.results.US.flatrate.length; i++) {
+            console.log(data.results.US.flatrate[i])
+
+            var streamProvider = document.createElement("li");
+
+            streamProvider.textContent = data.results.US.flatrate[i].provider_name;
+
+            streamList.appendChild(streamProvider);
+            console.log(streamProvider)
+        }
     })
 }
 

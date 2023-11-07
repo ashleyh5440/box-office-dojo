@@ -14,7 +14,9 @@
     <main>
         <section class="desktop">
             <div class="columns">
+              <!-- left column: nav buttons, movie list bar -->
                 <div class="column is-one-third leftCol">
+                  <!-- navigation -->
                   <nav class="navbar">
                     <button class="button" id="homeBtn">Home</button>
                     <button class="button" id="movieListBtn">Movie List</button>
@@ -29,12 +31,13 @@
                       </div>
                     </div>
                 </div>
+                <!-- right column: header text, search bar + button, previous searches list, genre buttons -->
                 <div class="column rightCol is-two-thirds">
                     <header>The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
                     <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
                     <input class="button submitBtn"type="submit" value="Submit">
-
                     <div class="columns">
+                      <!-- right column, previous searches -->
                         <div class="column is-one-quarter">
                           <div class="searches">
                             <h1>Previous searches</h1>
@@ -42,7 +45,7 @@
                             <ul id="previousSearchesList">
                             </ul>
                       </div>
-
+                      <!-- left column, genre buttons -->
                         <div class="column genres">
                           <!-- left column -->
                           <div class="left">

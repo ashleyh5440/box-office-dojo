@@ -1,3 +1,4 @@
+
 h1 {
     font-size: xx-large;
 }
@@ -22,6 +23,12 @@ p {
     display: flex;
     flex-wrap: wrap;
     margin-top: 3%;
+}
+
+.search-display {
+    color: white;
+    text-align: center;
+    
 }
 
 .movie-search-result h3 {

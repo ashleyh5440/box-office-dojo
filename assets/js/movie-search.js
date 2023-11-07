@@ -133,6 +133,8 @@ function displayMovieDetails(event) {
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
 
+        movieSummary.setAttribute("color", "white");
+
         movieDetail.appendChild(movieSummary);
         movieDetail.appendChild(movieTime);
 

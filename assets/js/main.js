@@ -270,19 +270,19 @@ function getMovieList() {
     // Creates empty array for the start
     var movieTitles = [];
    movieTitles = movieTitles.concat(JSON.parse(localStorage.getItem("watch-list")));
-    
+    console.log(movieTitles)
     // Ensures blank elements won't be created with empty array when no titles have been searched yet
     if (movieTitles[0] === null) {
         return;
     }
 
     // Displays top 10 movie list titles
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < movieTitles.length; i++) {
        
         var movieTitle = document.createElement("li");
         
         movieTitle.setAttribute("class", "movie-title");
-        movieTitle.textContent = movieTitles[i];
+        movieTitle.textContent = movieTitles[i].title;
 
         movieListDisplay.appendChild(movieTitle);
     }

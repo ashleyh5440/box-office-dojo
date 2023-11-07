@@ -213,7 +213,11 @@ function addToList() {
         return;
     }
 
-    movieList.unshift(movieTitle.textContent);
+    var movie = {
+        title: movieTitle.textContent,
+        id: moviePoster.value
+    }
+    movieList.unshift(movie);
   
 
     localStorage.setItem("watch-list", JSON.stringify(movieList));

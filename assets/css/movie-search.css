@@ -51,6 +51,11 @@ p {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.movie-search-result {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .giphy {
     border: 5px solid pink;
 }

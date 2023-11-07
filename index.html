@@ -9,7 +9,6 @@
 <!-- stylesheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/movie-search.css">
 </head>
 <body style="background-image: url('https://img.freepik.com/free-photo/movie-background-collage_23-2149876003.jpg?w=826&t=st=1698793015~exp=1698793615~hmac=124f7ac58a6320b47d74336c2d4da31e2ee94bc437fee2f74d365b8af077e526');">
     <main>
@@ -45,30 +44,31 @@
                       </div>
 
                         <div class="column genres">
-                          <!-- Second column -->
+                          <!-- left column -->
                           <div class="left">
-                            <button class="button genBtn" id="horror"><img src="./assets/horror.png">Horror</button>
-                            <button class="button genBtn" id="action"><img src="./assets/action.png">Action</button>
-                            <button class="button genBtn" id="comedy"><img src="./assets/comedy.png">Comedy</button>
-                            <button class="button genBtn" id="romance"><img src="./assets/romance.png">Romance</button>
+                            <button class="button genBtn" id="horror">Horror<img class="horror-img" src="./assets/horror.png"></button>
+                            <button class="button genBtn" id="action">Action<img src="./assets/action.png"></button>
+                            <button class="button genBtn" id="comedy">Comedy<img src="./assets/comedy.png"></button>
+                            <button class="button genBtn" id="romance">Romance<img src="./assets/romance.png"></button>
                           </div>
+                          <!-- right column -->
                           <div class="right">
-                            <button class="button genBtn" id="historical"><img src="./assets/historical.png">Historical</button>
-                            <button class="button genBtn" id="sci-fi"><img src="./assets/sci-fi.png">Sci-fi</button>
-                            <button class="button genBtn" id="fantasy"><img src="./assets/fantasy.png">Fantasy</button>
-                            <button class="button genBtn" id="thriller"><img src="./assets/thriller.png">Thriller</button>
+                            <button class="button genBtn" id="historical">Historical<img src="./assets/historical.png"></button>
+                            <button class="button genBtn" id="sci-fi">Sci-fi<img src="./assets/sci-fi.png"></button>
+                            <button class="button genBtn" id="fantasy">Fantasy<img src="./assets/fantasy.png"></button>
+                            <button class="button genBtn" id="thriller">Thriller<img src="./assets/thriller.png"></button>
                           </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
+<!-- mobile version -->
         <section class="mobile">
           <div> 
             <nav class="navbar">
               <button class="button" id="homeBtn">Home</button>
-              <button class="button" id="idkBtn">Movie List</button>
+              <button class="button" id="movieListBtn">Movie List</button>
             </nav>
             <header>The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
           </div>

@@ -30,9 +30,37 @@ function searchMovie() {
                 localStorage.setItem("search-use", "search-button")
                 // Moves to movie search page
                 window.location.href = "movie-search.html"
+                
+                function searchMovie() {   // Added search movie function for Gifs 
+                    const movieSearch = movieInput.value;
+                    getMovieGifs(movieSearch);
+                }
+                
             }
             
         })
+        function getMovieGifs(movieSearch) {
+            const giphyAPIkey = "V8wtjZi02K8tx51xGg58yNZGR4KH1g89";
+            const searchGiphyURL = "https://api.giphy.com/v1/gifs/search?api_key=" + giphyAPIkey + "&q=" + movieSearch + "+movie&limit=8&offset=0&rating=pg-13&lang=en&bundle=messaging_non_clips";
+            
+            fetch(searchGiphyURL)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+                   
+                    const giphyDiv = document.querySelector(".giphy");
+                    giphyDiv.innerHTML = "";
+                    for (var i = 0; i < data.data.length; i++) {
+                        const gifUrl = data.data[i].images.downsized_medium.url;
+                        const gifImg = document.createElement("img");
+                        gifImg.src = gifUrl;
+                        giphyDiv.appendChild(gifImg);
+                    }
+                });
+        }
+        
 }
 
 // Gets specific details for individual movies to be used later

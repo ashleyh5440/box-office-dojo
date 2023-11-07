@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/movie-search.css">
 </head>
+
 <body style="background-image: url('https://img.freepik.com/free-photo/movie-background-collage_23-2149876003.jpg?w=826&t=st=1698793015~exp=1698793615~hmac=124f7ac58a6320b47d74336c2d4da31e2ee94bc437fee2f74d365b8af077e526');">
     <main>
+      
         <section class="desktop">
             <div class="columns">
                 <div class="column is-one-third leftCol">
@@ -105,5 +107,12 @@
     </main>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="./assets/js/main.js"></script>  
+<script>
+  // Added an event listener for the submit button
+  document.getElementById("submitBtn").addEventListener("click", function() {
+      var movieSearch = document.getElementById("movieInput").value;
+      getMovieGifs(movieSearch);
+  });
+</script>
 </body>
 </html>

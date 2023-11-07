@@ -92,6 +92,7 @@ function displayMovieSearch() {
 
 // Displays details of individually selected movies
 function displayMovieDetails(event) {
+
     var resultList = document.querySelector(".movie-search-result");
 
     // Grabs ID for API use while it still exists
@@ -129,15 +130,22 @@ function displayMovieDetails(event) {
 
         movieSummary = document.createElement("p");
         movieTime = document.createElement("p");
+        addBtn = document.createElement("button");
 
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
+        
+        addBtn.textContent = "+ Add to Watch List";
+        addBtn.setAttribute("id", "add-button");
 
         movieSummary.setAttribute("color", "white");
 
         movieDetail.appendChild(movieSummary);
         movieDetail.appendChild(movieTime);
+        movieDetail.appendChild(addBtn)
 
+        // Uses JQuery for event delegation
+        $(resultList).on("click", "#add-button", addToList);
 
         // Insert GIPHY addition below in new appended section
 
@@ -156,4 +164,27 @@ function getStreamingServices() {
     .then(function (data) {
         console.log(data);
     })
+}
+
+// Adds movie to watch list
+function addToList() {
+    // Creates empty array for movie list
+    var movieList = []
+
+    movieList = movieList.concat(JSON.parse(localStorage.getItem("watch-list")));
+
+    // Removes null element
+    if (movieList[0] === null) {
+        movieList.pop();
+    }
+
+    // Ensures the same movie cannot be added multiple times 
+    if (movieList.includes(movieTitle.textContent)) {
+        return;
+    }
+
+    movieList.unshift(movieTitle.textContent);
+  
+
+    localStorage.setItem("watch-list", JSON.stringify(movieList));
 }

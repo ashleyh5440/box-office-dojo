@@ -176,7 +176,7 @@ function previousSearchInit() {
 
 // For displaying array of previously searched movies
 function renderPreviousSearch() {
-    var previousSearchList = document.querySelector("#previousSearchesList");
+    var previousSearchesList = document.querySelector("#previousSearchesList");
 
     // Clears any preexisting text from list
     previousSearchesList.innerHTML = "";
@@ -185,12 +185,38 @@ function renderPreviousSearch() {
     for (var i = 0; i < previousSearches.length; i++) {
        
         var previousSearchItem = document.createElement("li");
+        var previousSearchButton = document.createElement("button");
         
-        previousSearchItem.setAttribute("class", "previous-search-item");
-        previousSearchItem.textContent = previousSearches[i];
-        
-        previousSearchList.appendChild(previousSearchItem);
+        previousSearchItem.setAttribute("class", "previous-search-element");
+        previousSearchButton.setAttribute("class", "button previous-search-btn");
+        previousSearchButton.textContent = previousSearches[i];
+
+        previousSearchItem.appendChild(previousSearchButton);
+        previousSearchesList.appendChild(previousSearchItem);
     }
+
+    // Uses JQuery for event delegation to add functionality to buttons
+    $(previousSearchesList).on("click", ".previous-search-btn", function searchAgain(event) {
+        searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + event.target.textContent + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
+        fetch(searchMovieUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                searchResults = []
+                for (var i = 0; i < data.results.length; i++) {
+                    // console.log(data.results[i].id);
+                    console.log(data.results[i].original_title);
+                    searchResultsId = data.results[i].id;
+                    searchResults.push(data.results[i]);
+                    localStorage.setItem("movie-search", JSON.stringify(searchResults));
+                    localStorage.setItem("search-use", "search-button")
+                    // Moves to movie search page
+                    window.location.href = "movie-search.html"
+                }
+                
+            })
+    })
 }
 
 // For saving new searched movies to local storage

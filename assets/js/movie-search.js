@@ -143,3 +143,17 @@ function displayMovieDetails(event) {
 
     })
 }
+
+// Gets streaming services for movies
+function getStreamingServices() {
+    var streamingServices = "https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
+
+    streamingServices = "https://api.themoviedb.org/3/movie/11/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
+    fetch(streamingServices)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+}

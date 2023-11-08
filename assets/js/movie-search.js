@@ -182,7 +182,7 @@ function displayMovieDetails(event) {
 // Gets streaming services for movies
 function getStreamingServices() {
     var streamingServices = "https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
-
+    console.log(moviePoster.value)
     streamingServices = "https://api.themoviedb.org/3/movie/" + moviePoster.value + "/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(streamingServices)
     .then(function (response) {
@@ -192,6 +192,13 @@ function getStreamingServices() {
         var streamList = document.createElement("ul");
         streamList.textContent = "Streaming on:";
         movieDetail.appendChild(streamList);
+        console.log(data)
+        console.log(data.results[0])
+
+        if (!data.results.US) {
+            streamList.textContent = "Sorry! Looks like we can't find where to stream this movie!"
+            return;
+        }
 
         // If else required to display data due to API object
         if (data.results.US.flatrate) {
@@ -206,12 +213,14 @@ function getStreamingServices() {
                 streamProvider.textContent = data.results.US.rent[i].provider_name;
                 streamList.appendChild(streamProvider);
         }
-        } else {
+        } else if (data.results.US.buy) {
             for (var i = 0; i < data.results.US.buy.length; i++) {
                 var streamProvider = document.createElement("li");
                 streamProvider.textContent = data.results.US.buy[i].provider_name;
                 streamList.appendChild(streamProvider);
-        }
+            }
+        } else {
+            streamList.textContent = "Sorry! Looks like we can't find where to stream this movie!"
         }
     })
 
@@ -223,7 +232,6 @@ function addToList() {
     var savedMovies = []
 
     savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
-    console.log(savedMovies)
     // Removes null element
     if (savedMovies[0] === null) {
         savedMovies.pop();
@@ -232,6 +240,7 @@ function addToList() {
     // Ensures the same movie cannot be added multiple times 
     for (i = 0; i < savedMovies.length; i++) {
         if (savedMovies[i].title === movieTitle.textContent) {
+            $(addBtn).remove();
             return;
         }
     }
@@ -246,6 +255,15 @@ function addToList() {
   
 
     localStorage.setItem("watch-list", JSON.stringify(savedMovies));
+
+    $(addBtn).remove();
+
+    removeBtn = document.createElement("button");
+    removeBtn.textContent = "- Remove From Watch List";
+    removeBtn.setAttribute("id", "remove-button");
+    movieDetail.appendChild(removeBtn);
+    $(resultList).on("click", "#remove-button", removeFromList);
+    $(resultList).on("click", "#remove-button", getMovieList);
 }
 
 // For searching movies again using movie list buttons
@@ -287,18 +305,24 @@ function displayMovieAgain() {
 
         movieSummary = document.createElement("p");
         movieTime = document.createElement("p");
+        removeBtn = document.createElement("button");
 
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
 
+        removeBtn.textContent = "- Remove From Watch List";
+        removeBtn.setAttribute("id", "remove-button");
+
         movieDetail.appendChild(movieSummary);
         movieDetail.appendChild(movieTime);
+        movieDetail.appendChild(removeBtn);
 
         getStreamingServices();
 
         // Uses JQuery for event delegation
-        $(resultList).on("click", "#add-button", addToList);
-        $(resultList).on("click", "#add-button", getMovieList);
+        var resultList = document.querySelector(".movie-search-result");
+        $(resultList).on("click", "#remove-button", removeFromList);
+        $(resultList).on("click", "#remove-button", getMovieList);
 
         // Insert GIPHY addition below in new appended section
         getMovieGifs(data.title)
@@ -329,3 +353,28 @@ function displayMovieAgain() {
 
     }
     
+// Remove items
+function removeFromList() {
+    var savedMovies = [];
+
+    savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
+    console.log(savedMovies)
+
+    savedMovies = savedMovies.filter(item => item.title !== movieTitle.textContent);
+    console.log(savedMovies)
+    localStorage.setItem("watch-list", JSON.stringify(savedMovies));
+
+    // Eliminates remove button using JQuery
+    $(removeBtn).remove();
+
+    // Replaces add button
+    addBtn = document.createElement("button");
+    addBtn.textContent = "+ Add to Watch List";
+    addBtn.setAttribute("id", "add-button");
+    movieDetail.appendChild(addBtn);
+
+    // Uses JQuery for event delegation
+    var resultList = document.querySelector(".movie-search-result");
+    $(resultList).on("click", "#add-button", addToList);
+    $(resultList).on("click", "#add-button", getMovieList);
+}

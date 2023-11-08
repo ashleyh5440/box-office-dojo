@@ -24,11 +24,28 @@ submitButton.addEventListener("click", searchMovie);
 movieListBtn.addEventListener("click", moveToList);
 homeBtn.addEventListener("click", returnToHomepage);
 
+var submitButtonM = document.querySelector("#submitBtnMobile");
+var movieInputM = document.querySelector("#movieInputMobile");
+var movieListBtnM = document.querySelector("#movieListBtnMobile");
+var homeBtnM = document.querySelector("#homeBtnMobile");
+
+if (submitButtonM) {
+submitButtonM.addEventListener("click", searchMovie);
+movieListBtnM.addEventListener("click", moveToList);
+homeBtnM.addEventListener("click", returnToHomepage);
+}
+
+
 // Searches for movie based on user text input
 function searchMovie() {
-
     saveSearch();
-    searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
+    
+    // Checks for mobile screen
+    if (movieInput.value !== "") {
+    searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103";
+    } else {
+        searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInputM.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103";
+    }
     fetch(searchMovieUrl)
         .then(function (response) {
             return response.json();

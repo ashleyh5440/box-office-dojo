@@ -240,6 +240,7 @@ function addToList() {
     // Ensures the same movie cannot be added multiple times 
     for (i = 0; i < savedMovies.length; i++) {
         if (savedMovies[i].title === movieTitle.textContent) {
+            $(addBtn).remove();
             return;
         }
     }
@@ -254,6 +255,8 @@ function addToList() {
   
 
     localStorage.setItem("watch-list", JSON.stringify(savedMovies));
+
+    $(addBtn).remove();
 }
 
 // For searching movies again using movie list buttons
@@ -353,5 +356,17 @@ function removeFromList() {
     console.log(savedMovies)
     localStorage.setItem("watch-list", JSON.stringify(savedMovies));
 
+    // Eliminates remove button using JQuery
     $(removeBtn).remove();
+
+    // Replaces add button
+    addBtn = document.createElement("button");
+    addBtn.textContent = "+ Add to Watch List";
+    addBtn.setAttribute("id", "add-button");
+    movieDetail.appendChild(addBtn);
+
+    // Uses JQuery for event delegation
+    var resultList = document.querySelector(".movie-search-result");
+    $(resultList).on("click", "#add-button", addToList);
+    $(resultList).on("click", "#add-button", getMovieList);
 }

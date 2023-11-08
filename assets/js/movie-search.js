@@ -257,6 +257,13 @@ function addToList() {
     localStorage.setItem("watch-list", JSON.stringify(savedMovies));
 
     $(addBtn).remove();
+
+    removeBtn = document.createElement("button");
+    removeBtn.textContent = "- Remove From Watch List";
+    removeBtn.setAttribute("id", "remove-button");
+    movieDetail.appendChild(removeBtn);
+    $(resultList).on("click", "#remove-button", removeFromList);
+    $(resultList).on("click", "#remove-button", getMovieList);
 }
 
 // For searching movies again using movie list buttons
@@ -313,6 +320,7 @@ function displayMovieAgain() {
         getStreamingServices();
 
         // Uses JQuery for event delegation
+        var resultList = document.querySelector(".movie-search-result");
         $(resultList).on("click", "#remove-button", removeFromList);
         $(resultList).on("click", "#remove-button", getMovieList);
 

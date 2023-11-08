@@ -228,7 +228,7 @@ function renderPreviousSearch() {
 
     // Clears any preexisting text from list
     previousSearchesList.innerHTML = "";
-    
+    console.log(previousSearchesList);
     // Creates list items for each previously searched movie, sets class and text and appends to list
     for (var i = 0; i < previousSearches.length; i++) {
        
@@ -337,3 +337,10 @@ function getMovieList() {
         movieListDisplay.appendChild(movieTitle);
     }
 }
+
+
+// document.getElementById("previousSearchesBtnMobile")
+// .addEventListener("click", function(){
+//     renderPreviousSearch()
+// });
+

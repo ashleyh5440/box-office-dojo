@@ -51,9 +51,17 @@ p {
     flex-wrap: wrap;
 }
 
+.mobileSearchesBox {
+    display: none;
+}
+
 @media screen and (max-width: 1024px) {
     .movieListBox, .searchesBox {
         display: none;
+    }
+
+    .mobileSearchesBox {
+        display: block;
     }
 
     .movie-search-result {

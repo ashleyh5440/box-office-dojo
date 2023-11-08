@@ -156,7 +156,7 @@ header {
         align-items: center;
     }
     .genre-img {
-        width: 18%;
+        width: 75%;
     }
     #homeBtn, #movieListBtn {
         margin: 5% 7%;

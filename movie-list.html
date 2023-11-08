@@ -14,7 +14,7 @@
 </head>
 <body style="background-image: url('https://img.freepik.com/free-photo/movie-background-collage_23-2149876003.jpg?w=826&t=st=1698793015~exp=1698793615~hmac=124f7ac58a6320b47d74336c2d4da31e2ee94bc437fee2f74d365b8af077e526');">
     <main>
-      <section>
+      <section class="desktop">
         <div class="columns">
           <!-- left column: nav, previous searches -->
           <div class="column is-one-quarter leftCol">
@@ -33,16 +33,40 @@
             <header>The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
                     <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
                     <input class="button submitBtn" type="submit" value="Search">
-
+                    <!-- movie list box -->
           <div class="movie-list-container">
             <h1 class="container-head">Movie List</h1>
             <ul id="userMovieList">
             </ul>
           </div>
-
         </div>
       </section>
+      <!-- mobile version -->
+      <section class="mobile">
+        <div> 
+          <nav class="navbar">
+            <button class="button" id="homeBtn">Home</button>
+            <button class="button" id="movieListBtn">Movie List</button>
+          </nav>
+          <header>The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
+          <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
+                    <input class="button submitBtn" type="submit" value="Search">
+        </div>
+        <div class="movie-list-container">
+          <h1 class="container-head">Movie List</h1>
+          <ul id="userMovieList">
+          <li>Movie Title</li>
+          </ul>
+        </div>
+        <br>
+        <div class="searches">
+          <h1>Previous searches</h1>
+        </div class="previousSearches">
+          <ul id="previousSearchesList">
+          </ul>
+        </div>
 
+      </section>
     </main>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="./assets/js/main.js"></script> 

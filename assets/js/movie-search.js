@@ -262,6 +262,8 @@ function addToList() {
     removeBtn.textContent = "- Remove From Watch List";
     removeBtn.setAttribute("id", "remove-button");
     movieDetail.appendChild(removeBtn);
+
+    var resultList = document.querySelector(".movie-search-result");
     $(resultList).on("click", "#remove-button", removeFromList);
     $(resultList).on("click", "#remove-button", getMovieList);
 }

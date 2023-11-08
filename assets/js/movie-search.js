@@ -297,7 +297,7 @@ function displayMovieAgain() {
            
             const giphyDiv = document.querySelector(".movie-search-result");
             // giphyDiv.innerHTML = "";
-            for (var i = 0; i < 1; i++) {
+            for (var i = 0; i < 3; i++) {
                 const gifUrl = data.data[i].images.fixed_height.url
                 const gifImg = document.createElement("img");
                 gifImg.setAttribute('src', gifUrl) 

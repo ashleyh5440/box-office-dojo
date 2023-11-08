@@ -165,8 +165,6 @@ function getStreamingServices() {
         return response.json();
     })
     .then(function (data) {
-        console.log(data)
-
         var streamList = document.createElement("ul");
         streamList.textContent = "Streaming on:";
         movieDetail.appendChild(streamList);
@@ -210,7 +208,6 @@ function addToList() {
     // Ensures the same movie cannot be added multiple times 
     for (i = 0; i < savedMovies.length; i++) {
         if (savedMovies[i].title === movieTitle.textContent) {
-            console.log("fixed")
             return;
         }
     }

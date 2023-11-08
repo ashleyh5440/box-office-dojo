@@ -2,7 +2,7 @@ var searchMovieUrl = "https://api.themoviedb.org/3/search/movie?query=star+wars&
 var getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/9479?api_key=f73119f46966c54d15a0614dc6b82103"
 var searchGenreUrl = "https://api.themoviedb.org/3/discover/movie?genre={genre-name}&api_key=f73119f46966c54d15a0614dc6b82103"
 var genreListUrl = "https://api.themoviedb.org/3/genre/movie/list?api_key=f73119f46966c54d15a0614dc6b82103"
-
+console.log ('main.js')
 // Creates empty array to fill with previously searched items, placed outside functions to avoid errors
 var previousSearches = []
 
@@ -26,6 +26,7 @@ homeBtn.addEventListener("click", returnToHomepage);
 
 // Searches for movie based on user text input
 function searchMovie() {
+
     saveSearch();
     searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(searchMovieUrl)
@@ -45,9 +46,38 @@ function searchMovie() {
                 localStorage.setItem("search-use", "search-button")
                 // Moves to movie search page
                 window.location.href = "movie-search.html"
+                
+                function searchMovie() {   // Added search movie function for Gifs 
+                    const movieSearch = movieInput.value;
+                 
+                }
+                getMovieGifs(movieInput.value);
             }
             
         })
+        // Add gif to search page
+        function getMovieGifs(movieSearch) {
+            const giphyAPIkey = "V8wtjZi02K8tx51xGg58yNZGR4KH1g89";
+            const searchGiphyURL = "https://api.giphy.com/v1/gifs/search?api_key=" + giphyAPIkey + "&q=" + movieSearch + "+movie&limit=8&offset=0&rating=pg-13&lang=en&bundle=messaging_non_clips";
+            
+            fetch(searchGiphyURL)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+                   
+                    const giphyDiv = document.querySelector(".giphy");
+                    giphyDiv.innerHTML = "";
+                    for (var i = 0; i < data.data.length; i++) {
+                        const gifUrl = data.data[i].images.downsized_medium.url;
+                        const gifImg = document.createElement("img");
+                        gifImg.src = gifUrl;
+                        giphyDiv.appendChild(gifImg);
+                    }
+                });
+        }
+        
 }
 
 // Gets specific details for individual movies to be used later

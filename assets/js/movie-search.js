@@ -16,8 +16,6 @@ function displayGenreSearch() {
     resultList.innerHTML = ""
 
     var genreSearchResults = JSON.parse(localStorage.getItem("genre-search")).results;
-    console.log(genreSearchResults)
-    console.log(genreSearchResults.length)
 
     // Runs for loop of all available data
     for (var i = 0; i < genreSearchResults.length; i++) {
@@ -40,7 +38,6 @@ function displayGenreSearch() {
         moviePoster.src = "https://image.tmdb.org/t/p/w500" + movieId.poster_path;
         moviePoster.value = movieId.id
         moviePoster.setAttribute("class", "movie-poster")
-        console.log(moviePoster.value)
 
         movie.appendChild(movieTitle);
         movie.appendChild(movieLink)
@@ -211,7 +208,6 @@ function addToList() {
     }
 
     // Ensures the same movie cannot be added multiple times 
-
     for (i = 0; i < savedMovies.length; i++) {
         if (savedMovies[i].title === movieTitle.textContent) {
             console.log("fixed")
@@ -219,10 +215,12 @@ function addToList() {
         }
     }
 
+    // Creates object to hold both the name and the ID of the movie for API use
     var movie = {
         title: movieTitle.textContent,
         id: moviePoster.value
     }
+    // Adds new movie to top of array
     savedMovies.unshift(movie);
   
 

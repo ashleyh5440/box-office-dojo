@@ -270,7 +270,6 @@ function getMovieList() {
     // Creates empty array for the start
     var movieTitles = [];
    movieTitles = movieTitles.concat(JSON.parse(localStorage.getItem("watch-list")));
-    console.log(movieTitles)
     // Ensures blank elements won't be created with empty array when no titles have been searched yet
     if (movieTitles[0] === null) {
         return;

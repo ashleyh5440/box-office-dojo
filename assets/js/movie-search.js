@@ -327,6 +327,5 @@ function displayMovieAgain() {
 
         });
 
-    })
+    }
     
-}

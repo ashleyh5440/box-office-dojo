@@ -9,6 +9,8 @@ var previousSearches = []
 // Sets up genre buttons for use
 getGenreList();
 setGenreBtns();
+// Display movie list if existing
+getMovieList();
 
 // Sets up previous search list for use
 previousSearchInit();
@@ -22,11 +24,28 @@ submitButton.addEventListener("click", searchMovie);
 movieListBtn.addEventListener("click", moveToList);
 homeBtn.addEventListener("click", returnToHomepage);
 
+var submitButtonM = document.querySelector("#submitBtnMobile");
+var movieInputM = document.querySelector("#movieInputMobile");
+var movieListBtnM = document.querySelector("#movieListBtnMobile");
+var homeBtnM = document.querySelector("#homeBtnMobile");
+
+if (submitButtonM) {
+submitButtonM.addEventListener("click", searchMovie);
+movieListBtnM.addEventListener("click", moveToList);
+homeBtnM.addEventListener("click", returnToHomepage);
+}
+
+
 // Searches for movie based on user text input
 function searchMovie() {
-
     saveSearch();
-    searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
+    
+    // Checks for mobile screen
+    if (movieInput.value !== "") {
+    searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInput.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103";
+    } else {
+        searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + movieInputM.value + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103";
+    }
     fetch(searchMovieUrl)
         .then(function (response) {
             return response.json();
@@ -152,7 +171,6 @@ function setGenreBtns() {
         ]
         // Processes above array to allow each button to search for movies in its genre
         for (var i = 0; i < genreButtons.length; i++) {
-            console.log(genreButtons[i].value)
             genreButtons[i].addEventListener("click", searchGenre)
         }
     }
@@ -206,7 +224,7 @@ function previousSearchInit() {
 
 // For displaying array of previously searched movies
 function renderPreviousSearch() {
-    var previousSearchList = document.querySelector("#previousSearchesList");
+    var previousSearchesList = document.querySelector("#previousSearchesList");
 
     // Clears any preexisting text from list
     previousSearchesList.innerHTML = "";
@@ -215,12 +233,38 @@ function renderPreviousSearch() {
     for (var i = 0; i < previousSearches.length; i++) {
        
         var previousSearchItem = document.createElement("li");
+        var previousSearchButton = document.createElement("button");
         
-        previousSearchItem.setAttribute("class", "previous-search-item");
-        previousSearchItem.textContent = previousSearches[i];
-        
-        previousSearchList.appendChild(previousSearchItem);
+        previousSearchItem.setAttribute("class", "previous-search-element");
+        previousSearchButton.setAttribute("class", "button previous-search-btn");
+        previousSearchButton.textContent = previousSearches[i];
+
+        previousSearchItem.appendChild(previousSearchButton);
+        previousSearchesList.appendChild(previousSearchItem);
     }
+
+    // Uses JQuery for event delegation to add functionality to buttons
+    $(previousSearchesList).on("click", ".previous-search-btn", function searchAgain(event) {
+        searchMovieUrl =  "https://api.themoviedb.org/3/search/movie?query=" + event.target.textContent + "&language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
+        fetch(searchMovieUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                searchResults = []
+                for (var i = 0; i < data.results.length; i++) {
+                    // console.log(data.results[i].id);
+                    console.log(data.results[i].original_title);
+                    searchResultsId = data.results[i].id;
+                    searchResults.push(data.results[i]);
+                    localStorage.setItem("movie-search", JSON.stringify(searchResults));
+                    localStorage.setItem("search-use", "search-button")
+                    // Moves to movie search page
+                    window.location.href = "movie-search.html"
+                }
+                
+            })
+    })
 }
 
 // For saving new searched movies to local storage
@@ -256,4 +300,36 @@ function moveToList() {
 // For returning to homepage
 function returnToHomepage() {
     window.location.href = "index.html";
+}
+
+// For displaying movie list on movie list element
+function getMovieList() {
+    var movieListDisplay = document.querySelector("#movieList");
+
+    // Prevents error when on the movie-list.html page
+    if (!movieListDisplay) {
+        return;
+    }
+
+    // Prevents lists from duplicating
+    movieListDisplay.innerHTML = ""
+
+    // Creates empty array for the start
+    var movieTitles = [];
+   movieTitles = movieTitles.concat(JSON.parse(localStorage.getItem("watch-list")));
+    // Ensures blank elements won't be created with empty array when no titles have been searched yet
+    if (movieTitles[0] === null) {
+        return;
+    }
+
+    // Displays top 10 movie list titles
+    for (var i = 0; i < movieTitles.length; i++) {
+       
+        var movieTitle = document.createElement("li");
+        
+        movieTitle.setAttribute("class", "movie-title");
+        movieTitle.textContent = movieTitles[i].title;
+
+        movieListDisplay.appendChild(movieTitle);
+    }
 }

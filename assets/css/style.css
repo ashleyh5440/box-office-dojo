@@ -82,7 +82,7 @@ header {
     margin-right: 35%;
 }
 
-#homeBtn, #movieListBtn {
+#homeBtn, #movieListBtn, .previous-search-btn {
     margin: 5% 7%;
     background-color: rgb(149, 20, 20);
     padding: 7%;
@@ -90,6 +90,9 @@ header {
     font-size: 25px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border: none;
+}
+
+.previous-search-btn {
 }
 
 #header-img {
@@ -140,6 +143,7 @@ header {
     padding: 30%;
 }
 
+
 @media screen and (max-width: 1024px) {
     .mobile {
         display: block;
@@ -155,7 +159,7 @@ header {
     .genre-img {
         width: 75%;
     }
-    #homeBtn, #movieListBtn {
+    #homeBtnMobile, #movieListBtnMobile {
         margin: 5% 7%;
         background-color: rgb(149, 20, 20);
         padding: 4%;

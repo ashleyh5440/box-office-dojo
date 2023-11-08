@@ -3,8 +3,10 @@
 var searchMethod = localStorage.getItem("search-use");
 if (searchMethod === "search-button") {
     displayMovieSearch();
-} else {
+} else if (searchMethod === "genre-button") {
     displayGenreSearch();
+} else {
+    displayMovieAgain();
 }
 
 // Displays searched movies from a genre button
@@ -14,8 +16,6 @@ function displayGenreSearch() {
     resultList.innerHTML = ""
 
     var genreSearchResults = JSON.parse(localStorage.getItem("genre-search")).results;
-    console.log(genreSearchResults)
-    console.log(genreSearchResults.length)
 
     // Runs for loop of all available data
     for (var i = 0; i < genreSearchResults.length; i++) {
@@ -38,7 +38,6 @@ function displayGenreSearch() {
         moviePoster.src = "https://image.tmdb.org/t/p/w500" + movieId.poster_path;
         moviePoster.value = movieId.id
         moviePoster.setAttribute("class", "movie-poster")
-        console.log(moviePoster.value)
 
         movie.appendChild(movieTitle);
         movie.appendChild(movieLink)
@@ -92,6 +91,7 @@ function displayMovieSearch() {
 
 // Displays details of individually selected movies
 function displayMovieDetails(event) {
+
     var resultList = document.querySelector(".movie-search-result");
 
     // Grabs ID for API use while it still exists
@@ -118,6 +118,7 @@ function displayMovieDetails(event) {
         movieTitle.textContent = data.title;
         moviePoster.src = "https://image.tmdb.org/t/p/w500" + data.poster_path;
         moviePoster.setAttribute("class", "movie-poster");
+        moviePoster.value = data.id
     
         movie.appendChild(movieTitle);
         movie.appendChild(moviePoster);
@@ -130,6 +131,162 @@ function displayMovieDetails(event) {
 
         movieSummary = document.createElement("p");
         movieTime = document.createElement("p");
+        addBtn = document.createElement("button");
+
+        movieSummary.textContent = data.overview;
+        movieTime.textContent = data.runtime + " minutes";
+        
+        addBtn.textContent = "+ Add to Watch List";
+        addBtn.setAttribute("id", "add-button");
+
+        movieSummary.setAttribute("color", "white");
+
+        movieDetail.appendChild(movieSummary);
+        movieDetail.appendChild(movieTime);
+        movieDetail.appendChild(addBtn)
+
+        getStreamingServices();
+
+        // Uses JQuery for event delegation
+        $(resultList).on("click", "#add-button", addToList);
+        $(resultList).on("click", "#add-button", getMovieList);
+
+        // Insert GIPHY addition below in new appended section
+        getMovieGifs(data.title)
+    })
+ 
+}
+ function getMovieGifs(movieSearch) {
+    const giphyAPIkey = "V8wtjZi02K8tx51xGg58yNZGR4KH1g89";
+    const searchGiphyURL = "https://api.giphy.com/v1/gifs/search?api_key=" + giphyAPIkey + "&q=" + movieSearch + "+movie&limit=8&offset=0&rating=pg-13&lang=en&bundle=messaging_non_clips";
+    
+    fetch(searchGiphyURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+           
+            const giphyDiv = document.querySelector(".movie-search-result");
+            // giphyDiv.innerHTML = "";
+            for (var i = 0; i < 1; i++) {
+                const gifUrl = data.data[i].images.fixed_height.url
+                const gifImg = document.createElement("img");
+                gifImg.setAttribute('src', gifUrl) 
+                giphyDiv.appendChild(gifImg);
+            }
+
+        });
+}
+
+// Gets streaming services for movies
+function getStreamingServices() {
+    var streamingServices = "https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
+
+    streamingServices = "https://api.themoviedb.org/3/movie/" + moviePoster.value + "/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
+    fetch(streamingServices)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        var streamList = document.createElement("ul");
+        streamList.textContent = "Streaming on:";
+        movieDetail.appendChild(streamList);
+
+        // If else required to display data due to API object
+        if (data.results.US.flatrate) {
+            for (var i = 0; i < data.results.US.flatrate.length; i++) {
+                var streamProvider = document.createElement("li");
+                streamProvider.textContent = data.results.US.flatrate[i].provider_name;
+                streamList.appendChild(streamProvider);
+            }
+        } else if (data.results.US.rent) {
+            for (var i = 0; i < data.results.US.rent.length; i++) {
+                var streamProvider = document.createElement("li");
+                streamProvider.textContent = data.results.US.rent[i].provider_name;
+                streamList.appendChild(streamProvider);
+        }
+        } else {
+            for (var i = 0; i < data.results.US.buy.length; i++) {
+                var streamProvider = document.createElement("li");
+                streamProvider.textContent = data.results.US.buy[i].provider_name;
+                streamList.appendChild(streamProvider);
+        }
+        }
+    })
+
+}
+
+// Adds movie to watch list
+function addToList() {
+    // Creates empty array for movie list
+    var savedMovies = []
+
+    savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
+    console.log(savedMovies)
+    // Removes null element
+    if (savedMovies[0] === null) {
+        savedMovies.pop();
+    }
+
+    // Ensures the same movie cannot be added multiple times 
+    for (i = 0; i < savedMovies.length; i++) {
+        if (savedMovies[i].title === movieTitle.textContent) {
+            return;
+        }
+    }
+
+    // Creates object to hold both the name and the ID of the movie for API use
+    var movie = {
+        title: movieTitle.textContent,
+        id: moviePoster.value
+    }
+    // Adds new movie to top of array
+    savedMovies.unshift(movie);
+  
+
+    localStorage.setItem("watch-list", JSON.stringify(savedMovies));
+}
+
+// For searching movies again using movie list buttons
+function displayMovieAgain() {
+    var resultList = document.querySelector(".movie-search-result");
+
+    // Grabs ID for API use from localStorage
+    var searchResultsId = JSON.parse(localStorage.getItem("movie-search"));
+    // Clears any pre-existing text
+    resultList.innerHTML = ""
+   
+    getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/" + searchResultsId + "?language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
+    fetch(getMovieDetailsUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        // Creates section on left for poster and title
+        movie = document.createElement("section");
+        movie.setAttribute("class", "search-display column is-6");
+        resultList.appendChild(movie);
+    
+        movieTitle = document.createElement("h3");
+        moviePoster = document.createElement("img");
+    
+        movieTitle.textContent = data.title;
+        moviePoster.src = "https://image.tmdb.org/t/p/w500" + data.poster_path;
+        moviePoster.setAttribute("class", "movie-poster");
+        moviePoster.value = data.id
+    
+        movie.appendChild(movieTitle);
+        movie.appendChild(moviePoster);
+
+        // Creates section on right for movie details
+        movieDetail = document.createElement("section");
+        movieDetail.setAttribute("class", "search-display column is-6");
+        resultList.appendChild(movieDetail);
+
+        movieSummary = document.createElement("p");
+        movieTime = document.createElement("p");
 
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
@@ -137,6 +294,11 @@ function displayMovieDetails(event) {
         movieDetail.appendChild(movieSummary);
         movieDetail.appendChild(movieTime);
 
+        getStreamingServices();
+
+        // Uses JQuery for event delegation
+        $(resultList).on("click", "#add-button", addToList);
+        $(resultList).on("click", "#add-button", getMovieList);
 
         // Insert GIPHY addition below in new appended section
         getMovieGifs(data.title)
@@ -164,4 +326,6 @@ function displayMovieDetails(event) {
             }
 
         });
-}
+
+    }
+    

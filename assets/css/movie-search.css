@@ -1,3 +1,4 @@
+
 h1 {
     font-size: xx-large;
 }
@@ -32,11 +33,22 @@ p {
 .whereToWatch {
 }
 
+.search-display {
+    color: white;
+    text-align: center;
+    
+}
+
 .movie-search-result h3 {
     color: white;
     text-align: center;
     font-size: 30px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.movie-search-result {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .giphy {
@@ -50,5 +62,6 @@ p {
     background-color: rgb(73, 0, 73);
     color: white;
     border: none;
+    visibility: hidden;
 }
 

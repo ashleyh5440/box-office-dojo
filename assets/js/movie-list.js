@@ -37,12 +37,9 @@ function movieListInit() {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
-                // Logs details for all possible listings of the searched movie
-                searchResults = []
-                searchResultsId = data.id;
-                searchResults.push(searchResultsId);
-                localStorage.setItem("movie-search", JSON.stringify(searchResults));
+                // Grabs ID for API use
+                searchResult = data.id;
+                localStorage.setItem("movie-search", JSON.stringify(searchResult));
                 localStorage.setItem("search-use", "movie-button")
                 // Moves to movie search page
                 window.location.href = "movie-search.html"

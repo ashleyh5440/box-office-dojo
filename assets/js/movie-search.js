@@ -201,34 +201,39 @@ function getStreamingServices() {
 // Adds movie to watch list
 function addToList() {
     // Creates empty array for movie list
-    var movieList = []
+    var savedMovies = []
 
-    movieList = movieList.concat(JSON.parse(localStorage.getItem("watch-list")));
-
+    savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
+    console.log(savedMovies)
     // Removes null element
-    if (movieList[0] === null) {
-        movieList.pop();
+    if (savedMovies[0] === null) {
+        savedMovies.pop();
     }
 
     // Ensures the same movie cannot be added multiple times 
-    if (movieList.includes(movieTitle.textContent)) {
-        return;
+
+    for (i = 0; i < savedMovies.length; i++) {
+        if (savedMovies[i].title === movieTitle.textContent) {
+            console.log("fixed")
+            return;
+        }
     }
 
     var movie = {
         title: movieTitle.textContent,
         id: moviePoster.value
     }
-    movieList.unshift(movie);
+    savedMovies.unshift(movie);
   
 
-    localStorage.setItem("watch-list", JSON.stringify(movieList));
+    localStorage.setItem("watch-list", JSON.stringify(savedMovies));
 }
 
+// For searching movies again using movie list buttons
 function displayMovieAgain() {
     var resultList = document.querySelector(".movie-search-result");
 
-    // Grabs ID for API use
+    // Grabs ID for API use from localStorage
     var searchResultsId = JSON.parse(localStorage.getItem("movie-search"));
     // Clears any pre-existing text
     resultList.innerHTML = ""

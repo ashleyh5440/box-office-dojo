@@ -36,7 +36,7 @@
                 <!-- right column: header text, search bar + button, previous searches list, genre buttons -->
                 <div class="column rightCol is-two-thirds">
                     <header>The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
-                    <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
+                    <input class="input is-rounded" id="movieInputMobile" type="text" placeholder="Enter a movie">
                     <input class="button submitBtn"type="submit" value="Submit">
                     <div class="columns">
                       <!-- right column, previous searches -->
@@ -72,13 +72,23 @@
         <section class="mobile">
           <div> 
             <nav class="navbar">
-              <button class="button" id="homeBtn">Home</button>
-              <button class="button" id="movieListBtn">Movie List</button>
+              <button class="button" id="homeBtnMobile">Home</button>
+              <button class="button" id="movieListBtnMobile">Movie List</button>
             </nav>
             <header>The Box Office Dojo <img id="header-img" src="./assets/header-img.gif"></header>
           </div>
           <input class="input is-rounded" id="movieInput" type="text" placeholder="Enter a movie">
-                    <input class="button submitBtn"type="submit" value="Submit">
+                    <input class="button submitBtn" id="submitBtnMobile" type="submit" value="Submit">
+          <!-- movie list -->
+          <div class="movieListBox">
+            <div>
+              <h1>Movie List</h1>
+            </div>
+            <div>
+              <ul id="movieList">
+              </ul>
+            </div>
+          </div>
           <!-- genre boxes -->
           <div class="genres">
               <button class="button genBtn" id="horror-mobile"><img class="genre-img" src="./assets/horror.png">Horror</button>
@@ -104,10 +114,10 @@
 <script src="./assets/js/main.js"></script>  
 <script>
   // Added an event listener for the submit button
-  document.getElementById("submitBtn").addEventListener("click", function() {
-      var movieSearch = document.getElementById("movieInput").value;
-      getMovieGifs(movieSearch);
-  });
+  // document.getElementById("submitBtn").addEventListener("click", function() {
+  //     var movieSearch = document.getElementById("movieInput").value;
+  //     getMovieGifs(movieSearch);
+  // });
 </script>
 </body>
 </html>

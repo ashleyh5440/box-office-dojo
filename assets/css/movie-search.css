@@ -52,3 +52,12 @@ p {
     border: none;
 }
 
+
+@media screen and (max-width: 1024px) {
+    .movieListBox, .searches, .previousSearches {
+        display: none;
+    }
+    #id previousSearchesList {
+        display: none;
+    }
+}

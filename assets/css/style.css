@@ -143,6 +143,7 @@ header {
     padding: 30%;
 }
 
+
 @media screen and (max-width: 1024px) {
     .mobile {
         display: block;
@@ -158,7 +159,7 @@ header {
     .genre-img {
         width: 75%;
     }
-    #homeBtn, #movieListBtn {
+    #homeBtnMobile, #movieListBtnMobile {
         margin: 5% 7%;
         background-color: rgb(149, 20, 20);
         padding: 4%;

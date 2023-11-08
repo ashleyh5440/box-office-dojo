@@ -51,17 +51,21 @@ p {
     flex-wrap: wrap;
 }
 
-.giphy {
-
+.mobileSearchesBox {
+    display: none;
 }
 
+@media screen and (max-width: 1024px) {
+    .movieListBox, .searchesBox {
+        display: none;
+    }
 
-#addListBtn {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 20px;
-    background-color: rgb(73, 0, 73);
-    color: white;
-    border: none;
-    visibility: hidden;
+    .mobileSearchesBox {
+        display: block;
+    }
+
+    .movie-search-result {
+        display: flex;
+        flex-direction: column;
+    }
 }
-

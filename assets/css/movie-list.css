@@ -30,3 +30,13 @@ li{
     opacity: 1;
     color: black;
 }
+
+.movie-title-btn {
+    font-size: 27px;
+    margin: auto 2%;
+    border: none;
+}
+
+.movie-title-btn:hover {
+    color: rgb(224, 116, 27);
+}

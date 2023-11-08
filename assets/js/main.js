@@ -228,7 +228,7 @@ function renderPreviousSearch() {
 
     // Clears any preexisting text from list
     previousSearchesList.innerHTML = "";
-    
+    console.log(previousSearchesList);
     // Creates list items for each previously searched movie, sets class and text and appends to list
     for (var i = 0; i < previousSearches.length; i++) {
        
@@ -241,6 +241,10 @@ function renderPreviousSearch() {
 
         previousSearchItem.appendChild(previousSearchButton);
         previousSearchesList.appendChild(previousSearchItem);
+
+        previousSearchButton.style.backgroundColor = 'rgb(199, 107, 15)';
+        previousSearchButton.style.padding = '2%'
+        previousSearchButton.style.fontSize = '20px'
     }
 
     // Uses JQuery for event delegation to add functionality to buttons
@@ -333,3 +337,10 @@ function getMovieList() {
         movieListDisplay.appendChild(movieTitle);
     }
 }
+
+
+// document.getElementById("previousSearchesBtnMobile")
+// .addEventListener("click", function(){
+//     renderPreviousSearch()
+// });
+

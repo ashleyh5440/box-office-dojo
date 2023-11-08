@@ -232,7 +232,6 @@ function addToList() {
     var savedMovies = []
 
     savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
-    console.log(savedMovies)
     // Removes null element
     if (savedMovies[0] === null) {
         savedMovies.pop();
@@ -296,18 +295,23 @@ function displayMovieAgain() {
 
         movieSummary = document.createElement("p");
         movieTime = document.createElement("p");
+        removeBtn = document.createElement("button");
 
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
 
+        removeBtn.textContent = "- Remove From Watch List";
+        removeBtn.setAttribute("id", "remove-button");
+
         movieDetail.appendChild(movieSummary);
         movieDetail.appendChild(movieTime);
+        movieDetail.appendChild(removeBtn);
 
         getStreamingServices();
 
         // Uses JQuery for event delegation
-        $(resultList).on("click", "#add-button", addToList);
-        $(resultList).on("click", "#add-button", getMovieList);
+        $(resultList).on("click", "#remove-button", removeFromList);
+        $(resultList).on("click", "#remove-button", getMovieList);
 
         // Insert GIPHY addition below in new appended section
         getMovieGifs(data.title)
@@ -338,3 +342,16 @@ function displayMovieAgain() {
 
     }
     
+// Remove items
+function removeFromList() {
+    var savedMovies = [];
+
+    savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
+    console.log(savedMovies)
+
+    savedMovies = savedMovies.filter(item => item.title !== movieTitle.textContent);
+    console.log(savedMovies)
+    localStorage.setItem("watch-list", JSON.stringify(savedMovies));
+
+    $(removeBtn).remove();
+}

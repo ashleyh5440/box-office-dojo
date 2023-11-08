@@ -241,6 +241,10 @@ function renderPreviousSearch() {
 
         previousSearchItem.appendChild(previousSearchButton);
         previousSearchesList.appendChild(previousSearchItem);
+
+        previousSearchButton.style.backgroundColor = 'rgb(199, 107, 15)';
+        previousSearchButton.style.padding = '2%'
+        previousSearchButton.style.fontSize = '20px'
     }
 
     // Uses JQuery for event delegation to add functionality to buttons

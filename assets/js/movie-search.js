@@ -136,8 +136,15 @@ function displayMovieDetails(event) {
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
         
-        addBtn.textContent = "+ Add to Watch List";
+        addBtn.textContent = "+ Add to Movie List";
         addBtn.setAttribute("id", "add-button");
+
+        addBtn.style.fontFamily = "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif";
+        addBtn.style.fontSize = '20px';
+        addBtn.style.backgroundColor = 'rgb(73, 0, 73)';
+        addBtn.style.color = 'white';
+        addBtn.style.padding = '3%';
+        addBtn.style.border = 'none';
 
         movieSummary.setAttribute("color", "white");
 

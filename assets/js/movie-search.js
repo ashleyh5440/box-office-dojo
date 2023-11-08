@@ -182,7 +182,7 @@ function displayMovieDetails(event) {
 // Gets streaming services for movies
 function getStreamingServices() {
     var streamingServices = "https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
-
+    console.log(moviePoster.value)
     streamingServices = "https://api.themoviedb.org/3/movie/" + moviePoster.value + "/watch/providers?api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(streamingServices)
     .then(function (response) {
@@ -192,6 +192,13 @@ function getStreamingServices() {
         var streamList = document.createElement("ul");
         streamList.textContent = "Streaming on:";
         movieDetail.appendChild(streamList);
+        console.log(data)
+        console.log(data.results[0])
+
+        if (!data.results.US) {
+            streamList.textContent = "Sorry! Looks like we can't find where to stream this movie!"
+            return;
+        }
 
         // If else required to display data due to API object
         if (data.results.US.flatrate) {
@@ -206,12 +213,14 @@ function getStreamingServices() {
                 streamProvider.textContent = data.results.US.rent[i].provider_name;
                 streamList.appendChild(streamProvider);
         }
-        } else {
+        } else if (data.results.US.buy) {
             for (var i = 0; i < data.results.US.buy.length; i++) {
                 var streamProvider = document.createElement("li");
                 streamProvider.textContent = data.results.US.buy[i].provider_name;
                 streamList.appendChild(streamProvider);
-        }
+            }
+        } else {
+            streamList.textContent = "Sorry! Looks like we can't find where to stream this movie!"
         }
     })
 

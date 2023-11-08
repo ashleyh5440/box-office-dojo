@@ -261,6 +261,7 @@ function displayMovieAgain() {
         movieDetail.setAttribute("class", "search-display column is-6");
         resultList.appendChild(movieDetail);
 
+
         movieSummary = document.createElement("p");
         movieTime = document.createElement("p");
 
@@ -279,7 +280,29 @@ function displayMovieAgain() {
         $(resultList).on("click", "#add-button", getMovieList);
 
         // Insert GIPHY addition below in new appended section
-
+        getMovieGifs(data.title)
     })
+ 
+}
+ function getMovieGifs(movieSearch) {
+    const giphyAPIkey = "V8wtjZi02K8tx51xGg58yNZGR4KH1g89";
+    const searchGiphyURL = "https://api.giphy.com/v1/gifs/search?api_key=" + giphyAPIkey + "&q=" + movieSearch + "+movie&limit=8&offset=0&rating=pg-13&lang=en&bundle=messaging_non_clips";
     
+    fetch(searchGiphyURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+           
+            const giphyDiv = document.querySelector(".movie-search-result");
+            // giphyDiv.innerHTML = "";
+            for (var i = 0; i < 1; i++) {
+                const gifUrl = data.data[i].images.fixed_height.url
+                const gifImg = document.createElement("img");
+                gifImg.setAttribute('src', gifUrl) 
+                giphyDiv.appendChild(gifImg);
+            }
+
+        });
 }

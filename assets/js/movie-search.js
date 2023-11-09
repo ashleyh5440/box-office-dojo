@@ -136,8 +136,15 @@ function displayMovieDetails(event) {
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
         
-        addBtn.textContent = "+ Add to Watch List";
+        addBtn.textContent = "+ Add to Movie List";
         addBtn.setAttribute("id", "add-button");
+
+        addBtn.style.fontFamily = "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif";
+        addBtn.style.fontSize = '20px';
+        addBtn.style.backgroundColor = 'rgb(73, 0, 73)';
+        addBtn.style.color = 'white';
+        addBtn.style.padding = '3%';
+        addBtn.style.border = 'none';
 
         movieSummary.setAttribute("color", "white");
 
@@ -259,13 +266,20 @@ function addToList() {
     $(addBtn).remove();
 
     removeBtn = document.createElement("button");
-    removeBtn.textContent = "- Remove From Watch List";
+    removeBtn.textContent = "- Remove From Movie List";
     removeBtn.setAttribute("id", "remove-button");
     movieDetail.appendChild(removeBtn);
 
     var resultList = document.querySelector(".movie-search-result");
     $(resultList).on("click", "#remove-button", removeFromList);
     $(resultList).on("click", "#remove-button", getMovieList);
+
+    removeBtn.style.fontFamily = "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif";
+        removeBtn.style.fontSize = '20px';
+        removeBtn.style.backgroundColor = 'rgb(73, 0, 73)';
+        removeBtn.style.color = 'white';
+        removeBtn.style.padding = '3%';
+        removeBtn.style.border = 'none';
 }
 
 // For searching movies again using movie list buttons
@@ -312,7 +326,7 @@ function displayMovieAgain() {
         movieSummary.textContent = data.overview;
         movieTime.textContent = data.runtime + " minutes";
 
-        removeBtn.textContent = "- Remove From Watch List";
+        removeBtn.textContent = "- Remove From Movie List";
         removeBtn.setAttribute("id", "remove-button");
 
         movieDetail.appendChild(movieSummary);
@@ -348,6 +362,9 @@ function displayMovieAgain() {
                 const gifUrl = data.data[i].images.fixed_height.url
                 const gifImg = document.createElement("img");
                 gifImg.setAttribute('src', gifUrl) 
+
+                gifImg.style.margin = "3%";
+
                 giphyDiv.appendChild(gifImg);
             }
 
@@ -371,7 +388,7 @@ function removeFromList() {
 
     // Replaces add button
     addBtn = document.createElement("button");
-    addBtn.textContent = "+ Add to Watch List";
+    addBtn.textContent = "+ Add to Movie List";
     addBtn.setAttribute("id", "add-button");
     movieDetail.appendChild(addBtn);
 

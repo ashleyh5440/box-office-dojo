@@ -79,7 +79,8 @@ header {
 }
 
 #movieInput {
-    margin-right: 35%;
+    /* margin-right: 35%; */
+    width: 90%;
 }
 
 #homeBtn, #movieListBtn, .previous-search-btn {
@@ -92,7 +93,18 @@ header {
     border: none;
 }
 
-.previous-search-btn {
+#movieListBtn:hover {
+    border: 3px solid white;
+}
+
+#homeBtn:hover {
+    border: 3px solid white;
+}
+
+#movieList {
+    background-color: white;
+    opacity: 0.5;
+    font-size: 20px;
 }
 
 #header-img {

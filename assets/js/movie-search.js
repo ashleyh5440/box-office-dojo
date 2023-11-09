@@ -150,17 +150,19 @@ function displayMovieDetails(event) {
         savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
 
         // Ensures the same movie cannot be added multiple times 
-        for (i = 0; i < savedMovies.length; i++) {
-            if (savedMovies[i].title === movieTitle.textContent) {
-                $(addBtn).remove();
-                removeBtn = document.createElement("button");
-                removeBtn.textContent = "- Remove From Movie List";
-                removeBtn.setAttribute("id", "remove-button");
-                movieDetail.appendChild(removeBtn);
-                $(resultList).on("click", "#remove-button", removeFromList);
-                $(resultList).on("click", "#remove-button", getMovieList);
-        
+        if (savedMovies[0] !== null) {
+            for (i = 0; i < savedMovies.length; i++) {
+                if (savedMovies[i].title === movieTitle.textContent) {
+                    $(addBtn).remove();
+                    removeBtn = document.createElement("button");
+                    removeBtn.textContent = "- Remove From Movie List";
+                    removeBtn.setAttribute("id", "remove-button");
+                    movieDetail.appendChild(removeBtn);
+                    $(resultList).on("click", "#remove-button", removeFromList);
+                    $(resultList).on("click", "#remove-button", getMovieList);
+            
 
+                }
             }
         }
 

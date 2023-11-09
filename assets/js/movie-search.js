@@ -139,18 +139,30 @@ function displayMovieDetails(event) {
         addBtn.textContent = "+ Add to Movie List";
         addBtn.setAttribute("id", "add-button");
 
-        addBtn.style.fontFamily = "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif";
-        addBtn.style.fontSize = '20px';
-        addBtn.style.backgroundColor = 'rgb(73, 0, 73)';
-        addBtn.style.color = 'white';
-        addBtn.style.padding = '3%';
-        addBtn.style.border = 'none';
-
         movieSummary.setAttribute("color", "white");
 
         movieDetail.appendChild(movieSummary);
         movieDetail.appendChild(movieTime);
         movieDetail.appendChild(addBtn)
+
+        var savedMovies = []
+
+        savedMovies = savedMovies.concat(JSON.parse(localStorage.getItem("watch-list")));
+
+        // Ensures the same movie cannot be added multiple times 
+        for (i = 0; i < savedMovies.length; i++) {
+            if (savedMovies[i].title === movieTitle.textContent) {
+                $(addBtn).remove();
+                removeBtn = document.createElement("button");
+                removeBtn.textContent = "- Remove From Movie List";
+                removeBtn.setAttribute("id", "remove-button");
+                movieDetail.appendChild(removeBtn);
+                $(resultList).on("click", "#remove-button", removeFromList);
+                $(resultList).on("click", "#remove-button", getMovieList);
+        
+
+            }
+        }
 
         getStreamingServices();
 
@@ -269,32 +281,28 @@ function addToList() {
     removeBtn.textContent = "- Remove From Movie List";
     removeBtn.setAttribute("id", "remove-button");
     movieDetail.appendChild(removeBtn);
-    $(resultList).on("click", "#remove-button", removeFromList);
-    $(resultList).on("click", "#remove-button", getMovieList);
 
-    removeBtn.style.fontFamily = "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif";
-        removeBtn.style.fontSize = '20px';
-        removeBtn.style.backgroundColor = 'rgb(73, 0, 73)';
-        removeBtn.style.color = 'white';
-        removeBtn.style.padding = '3%';
-        removeBtn.style.border = 'none';
+    var resultList = document.querySelector(".movie-search-result");
+    removeBtn.addEventListener("click", removeFromList);
+    removeBtn.addEventListener("click", getMovieList);
 }
 
 // For searching movies again using movie list buttons
 function displayMovieAgain() {
-    var resultList = document.querySelector(".movie-search-result");
-
     // Grabs ID for API use from localStorage
     var searchResultsId = JSON.parse(localStorage.getItem("movie-search"));
-    // Clears any pre-existing text
-    resultList.innerHTML = ""
-   
+ 
     getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/" + searchResultsId + "?language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(getMovieDetailsUrl)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
+
+        var resultList = document.querySelector(".movie-search-result");
+       // Clears any pre-existing text
+        resultList.innerHTML = ""
+       
         console.log(data);
         // Creates section on left for poster and title
         movie = document.createElement("section");
@@ -392,6 +400,6 @@ function removeFromList() {
 
     // Uses JQuery for event delegation
     var resultList = document.querySelector(".movie-search-result");
-    $(resultList).on("click", "#add-button", addToList);
-    $(resultList).on("click", "#add-button", getMovieList);
+    addBtn.addEventListener("click", addToList);
+    addBtn.addEventListener("click", getMovieList);
 }

@@ -284,19 +284,20 @@ function addToList() {
 
 // For searching movies again using movie list buttons
 function displayMovieAgain() {
-    var resultList = document.querySelector(".movie-search-result");
-
     // Grabs ID for API use from localStorage
     var searchResultsId = JSON.parse(localStorage.getItem("movie-search"));
-    // Clears any pre-existing text
-    resultList.innerHTML = ""
-   
+ 
     getMovieDetailsUrl = "https://api.themoviedb.org/3/movie/" + searchResultsId + "?language=en-us&region=US&api_key=f73119f46966c54d15a0614dc6b82103"
     fetch(getMovieDetailsUrl)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
+
+        var resultList = document.querySelector(".movie-search-result");
+       // Clears any pre-existing text
+        resultList.innerHTML = ""
+       
         console.log(data);
         // Creates section on left for poster and title
         movie = document.createElement("section");

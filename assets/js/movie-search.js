@@ -258,14 +258,14 @@ function addToList() {
 
     $(addBtn).remove();
 
-    // removeBtn = document.createElement("button");
-    // removeBtn.textContent = "- Remove From Movie List";
-    // removeBtn.setAttribute("id", "remove-button");
-    // movieDetail.appendChild(removeBtn);
+    removeBtn = document.createElement("button");
+    removeBtn.textContent = "- Remove From Movie List";
+    removeBtn.setAttribute("id", "remove-button");
+    movieDetail.appendChild(removeBtn);
 
-    // var resultList = document.querySelector(".movie-search-result");
-    // $(resultList).on("click", "#remove-button", removeFromList);
-    // $(resultList).on("click", "#remove-button", getMovieList);
+    var resultList = document.querySelector(".movie-search-result");
+    removeBtn.addEventListener("click", removeFromList);
+    removeBtn.addEventListener("click", getMovieList);
 }
 
 // For searching movies again using movie list buttons
@@ -373,14 +373,14 @@ function removeFromList() {
     // Eliminates remove button using JQuery
     $(removeBtn).remove();
 
-    // // Replaces add button
-    // addBtn = document.createElement("button");
-    // addBtn.textContent = "+ Add to Movie List";
-    // addBtn.setAttribute("id", "add-button");
-    // movieDetail.appendChild(addBtn);
+    // Replaces add button
+    addBtn = document.createElement("button");
+    addBtn.textContent = "+ Add to Movie List";
+    addBtn.setAttribute("id", "add-button");
+    movieDetail.appendChild(addBtn);
 
-    // // Uses JQuery for event delegation
-    // var resultList = document.querySelector(".movie-search-result");
-    // $(resultList).on("click", "#add-button", addToList);
-    // $(resultList).on("click", "#add-button", getMovieList);
+    // Uses JQuery for event delegation
+    var resultList = document.querySelector(".movie-search-result");
+    addBtn.addEventListener("click", addToList);
+    addBtn.addEventListener("click", getMovieList);
 }

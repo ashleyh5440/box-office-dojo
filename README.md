@@ -4,7 +4,7 @@ Have you ever thought of all the movies you'd want to watch and just hoping you'
 <br> Well, Box Office Dojo is here to help!
 <br> Box Office Dojo is the perfect place to curate your own personal movie watch list.
 
-[A link to the website can be found here.](https://mb739132.github.io/Box-Office-Dojo/)
+[A link to the website can be found here.](https://ashleyh5440.github.io/box-office-dojo/)
 ## How It Works
 
 BOD uses two different API's to function.
